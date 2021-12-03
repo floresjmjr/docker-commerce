@@ -1,0 +1,17 @@
+section.single-product {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+img.single-product-image {
+    height: 250px;
+    width: 250px;
+}
+
+div#single-product-title {
+    font-size: 50;
+}
+
+div#single-product-category {
+    font-size: 25;
+}
