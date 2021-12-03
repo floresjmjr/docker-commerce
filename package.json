@@ -8,7 +8,8 @@
     "test:report": "jest --coverage=true",
     "eslint": "./node_modules/.bin/eslint .",
     "dev": "nodemon ./server/server.js",
-    "start": "node ./server/server.js"
+    "start": "node ./server/server.js",
+    "seed": "node seed.js"
   },
   "repository": {
     "type": "git",
