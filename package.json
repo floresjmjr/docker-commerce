@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server/server.js"
+    "test": "jest",
+    "test:report": "jest --coverage=true",
+    "eslint": "./node_modules/.bin/eslint .",
+    "dev": "nodemon ./server/server.js",
+    "start": "node ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +30,9 @@
     "nodemon": "^2.0.15",
     "sequelize": "^6.12.0-alpha.1",
     "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-google": "^0.14.0"
   }
 }
