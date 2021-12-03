@@ -1,0 +1,30 @@
+<section id='addProductSection'>
+  <h2>New Product Item</h2>
+  <form action='/api/admin/newProduct' method='POST' id='addProductForm'>
+    <ul>
+      <li>
+        <label for='title'>Title</label>
+        <input type='text' id='title' name='title' />
+      </li>
+      <li>
+        <label for='price'>Price</label>
+        <input type='number' id='price' name='price' />
+      </li>
+      <li>
+        <label for='category'>Category</label>
+        <input type='text' id='category' name='category' />
+      </li>
+      <li>
+        <label for='image'>Image</label>
+        <input type='url' id='image' name='image' />
+      </li>
+      <li>
+        <label for='description'>Description</label>
+        <textarea rows='4' cols='50' id='description' name='description'>
+        </textarea>
+      </li>
+    </ul>
+    <button id="resetButton">Reset Form</button>
+    <button type='submit'>Create Product</button>
+  </form>
+</section>

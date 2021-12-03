@@ -1,0 +1,31 @@
+<section id='updateProductSection'>
+  {{#with product}}
+  <h2>Update Product Item</h2>
+  <form action='/api/updateproduct/{{id}}/update' method='POST' id='updateProductForm'>
+    <ul>
+      <li>
+        <label for='title'>Title</label>
+        <input type='text' id='title' name='title' value="{{title}}" />
+      </li>
+      <li>
+        <label for='price'>Price</label>
+        <input type='number' id='price' name='price' value="{{price}}" />
+      </li>
+      <li>
+        <label for='category'>Category</label>
+        <input type='text' id='category' name='category' value="{{category}}"/>
+      </li>
+      <li>
+        <label for='image'>Image</label>
+        <input type='url' id='image' name='image' value="{{image}}"/>
+      </li>
+      <li>
+        <label for='description'>Description</label>
+        <textarea rows='4' cols='50' id='description' name='description'>{{description}}
+        </textarea>
+      </li>
+    </ul>
+    <button type='submit'>Update Product</button>
+  </form>
+  {{/with}}
+</section>
