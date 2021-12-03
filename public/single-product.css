@@ -1,0 +1,18 @@
+section.single-product {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+img.single-product-image {
+    height: 250px;
+    width: 250px;
+    padding-right: 20px;
+}
+
+div#single-product-title {
+    font-size: 36px;
+}
+
+div#single-product-category {
+    font-size: 18px;
+}
