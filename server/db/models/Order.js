@@ -11,6 +11,5 @@ Order.init({
 
 }, {
   sequelize: db,
-  timestamps: false,
 });
 module.exports = Order;

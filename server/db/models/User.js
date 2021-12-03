@@ -6,7 +6,7 @@ class User extends Model {
 }
 
 User.init({
-  type: DataTypes.STRING,
+  type: DataTypes.STRING, //"Standard", "Admin"
   name: DataTypes.STRING,
   address: DataTypes.STRING,
   password: DataTypes.STRING,
