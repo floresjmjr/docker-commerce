@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
-//router.use('/apiroute, require(yourfilepath)')
+//router.use('/apiroute', require('./yourfilepath'))
+router.use('/user', require('./user'))
 
 //404 Error handler
 router.use((req, res, next) => {
