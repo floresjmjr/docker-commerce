@@ -1,0 +1,18 @@
+[
+    {
+        "type": "Standard",
+        "name": "User",
+        "address": "123 Somewhere St.",
+        "password": "123",
+        "email": "user@email.com",
+        "phone": "1234567890"
+    }, 
+    {
+        "type": "Admin",
+        "name": "Admin",
+        "address": "456 Elsewhere Rd.",
+        "password": "admin",
+        "email": "admin@email.com",
+        "phone": "0987654321"
+    }
+]

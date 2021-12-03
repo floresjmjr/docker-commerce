@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 // router.use('/apiroute, require(yourfilepath)')
 router.use('/products', require('./products'));
+router.use('/', require('./user'));
 router.use('/', require('./admin'))
 
 // 404 Error handler
