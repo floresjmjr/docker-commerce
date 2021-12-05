@@ -3,6 +3,7 @@ const router = require('express').Router();
 const {check, validationResult} = require('express-validator');
 const {User} = require('../db');
 
+
 const signupChecks = [
   check('name')
       .notEmpty().withMessage('name cannot be empty') // checks name is not empty
@@ -21,7 +22,7 @@ const signupChecks = [
       }),
   check('password').notEmpty(), // want to make this stronger but the data seeeded will needd to match validations,
 ];
-
+// let validatationError;
 
 router.get('/signup', async (req, res)=>{
   res.render('signup');
@@ -30,7 +31,11 @@ router.get('/signup', async (req, res)=>{
 router.post('/signup', signupChecks, async (req, res)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({errors: errors.array()});
+    // return res.status(400).json({errors: errors.array()});
+    const validationError = errors.array();
+    console.log('HEREEEEEE', validationError);
+
+    return res.render('signup', {validationError});
   }
   const newUser = await User.create(req.body);
   res.send(`<h3>Thanks your all signed up</h3>`);

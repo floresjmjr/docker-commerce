@@ -1,21 +1,38 @@
 <h1>welcome to the signup page</h1>
+
+{{#if validationError}}
+{{#each validationError}}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{this.param}}</strong> {{this.msg}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/each}}
+{{/if}}
+
+
+
+
+
 <form action="/user/signup" method="POST" id="new-user">
    <div class="mb-3">
     <label for="name" class="form-label">Name</label>
-    <input type="input" class="form-control" id="name" name='name'>
+    <input type="input" class="form-control" id="name" name='name' required>
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email'>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' required>
     <div id="email" class="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name='password'>
+    <input type="password" class="form-control" id="password" name='password' required>
   </div>
   <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Agree to the Terms and Conditions</label>
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+    <label class="form-check-label" for="invalidCheck">Agree to the Terms and Conditions</label>
+          <div class="invalid-feedback">
+        You must agree before submitting.
+      </div>
   </div>
   <button type="submit" class="btn btn-dark">Sign Up!</button>
 </form>

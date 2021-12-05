@@ -1,4 +1,9 @@
 const router = require('express').Router();
+const Handlebars = require('handlebars');
+Handlebars.registerHelper('isdefined', function(value) {
+  return value !== undefined;
+});
+
 
 // router.use('/apiroute', require('./yourfilepath'))
 router.use('/user', require('./user'));
@@ -13,10 +18,10 @@ router.use((req, res, next) => {
 });
 
 // Default error handler
-router.use((err, req, res, next) => {
-  console.error(`Start of Error:\n ${err} \nEnd of Error`);
-  res.status(500).send('Server error, please try again or at some other time.');
-  // Ideally a cool 500 page would be rendered
-});
+// router.use((err, req, res, next) => {
+//   console.error(`Start of Error:\n ${err} \nEnd of Error`);
+//   res.status(500).send('Server error, please try again or at some other time.');
+// Ideally a cool 500 page would be rendered
+// });
 
 module.exports = router;

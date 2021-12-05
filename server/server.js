@@ -9,12 +9,17 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const hbs = create({handlebars: allowInsecurePrototypeAccess(Handlebars)});
 
 app.engine('handlebars', hbs.engine);
+Handlebars.registerHelper('isdefined', function(value) {
+  return typeof value != 'undefined';
+});
 
 app.set('view engine', 'handlebars');
+
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
 
 app.use('/', require('./routes'));
 
