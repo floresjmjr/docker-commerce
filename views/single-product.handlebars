@@ -1,8 +1,16 @@
-<section class="single-product">
-    <img class="single-product-image" src={{product.image}} />
-    <div class="single-product-text">
-        <div id="single-product-title">{{product.title}}</div>
-        <div id="single-product-category">{{product.category}}</div>
+<section class="single-product-container">
+    <img class="single-product-image" src={{product.image}} alt={{product.title}} />
+    <div class="single-product-text-container">
+        <div class="single-product-title">
+            {{product.title}}
+            {{!-- <span class="single-product-admin-button"><a href="/">Edit Product</a></span> --}}
+        </div>
+        <div class="single-product-category">{{product.category}}</div>
         <div class="single-product-description">{{product.description}}</div>
+        <div class="single-product-price">${{product.price}}</div>
+        <button class="single-product-cart-cta">Add to Cart</button>
+        {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
+            <a href="/">Delete Product</a>
+        </div> --}}
     </div>
 </section>
