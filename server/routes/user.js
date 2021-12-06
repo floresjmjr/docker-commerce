@@ -33,7 +33,6 @@ router.post('/signup', signupChecks, async (req, res)=>{
   if (!errors.isEmpty()) {
     // return res.status(400).json({errors: errors.array()});
     const validationError = errors.array();
-    console.log('HEREEEEEE', validationError);
 
     return res.render('signup', {validationError});
   }

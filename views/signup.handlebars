@@ -9,11 +9,10 @@
 {{/each}}
 {{/if}}
 
-
-<form action="/user/signup" method="POST" id="new-user">
+<form action="/user/signup" method="POST" id="new-user" class="needs-validation" >
    <div class="mb-3">
     <label for="name" class="form-label">Name</label>
-    <input type="input" class="form-control" id="name" name='name' required>
+    <input type="text" class="form-control" id="validationCustom03" name='name' required>
     <div class="invalid-feedback">
       Please provide a valid name.
     </div>
@@ -41,5 +40,49 @@
         You must agree before submitting.
       </div>
   </div>
+  
   <button type="submit" class="btn btn-dark">Sign Up!</button>
 </form>
+
+
+<script>
+(function () {
+'use strict'
+const forms = document.querySelectorAll('.requires-validation')
+Array.from(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+    if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+    }
+  
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
