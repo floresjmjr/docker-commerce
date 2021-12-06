@@ -1,0 +1,82 @@
+
+
+main {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 50px;
+}
+
+#sectionProducts p {
+  margin: 0 30px;
+  padding: 0;
+}
+
+#productsListContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#productsList {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  gap: 40px 10px;
+  align-items: center;
+}
+
+#sectionProducts {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 1300px;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Sets the box sizes for the restaurant items so we can have equal spacing between them as the pictures are different sizes */
+.products {
+  display: flex;
+  justify-content: center;
+  width: 300px;
+}
+
+.products img {
+  width: 200px;
+}
+
+#productsSubNav {
+  display: flex;
+  justify-content: flex-end;
+  margin: 40px
+}
+
+#productsSubNav a {
+  margin-left: 20px;
+  background: #b1b2b5;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#sectionProducts a {
+  text-decoration: none;
+  color: black;
+}
+
+.productPictureContainer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.priceContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
