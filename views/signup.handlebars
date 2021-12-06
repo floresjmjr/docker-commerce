@@ -1,21 +1,88 @@
 <h1>welcome to the signup page</h1>
-<form action="/user/signup" method="POST" id="new-user">
+
+{{#if validationError}}
+{{#each validationError}}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Error:</strong> {{this.msg}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/each}}
+{{/if}}
+
+<form action="/user/signup" method="POST" id="new-user" class="needs-validation" >
    <div class="mb-3">
     <label for="name" class="form-label">Name</label>
-    <input type="input" class="form-control" id="name" name='name'>
+    <input type="text" class="form-control" id="validationCustom03" name='name' required>
+    <div class="invalid-feedback">
+      Please provide a valid name.
+    </div>
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email'>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' required>
     <div id="email" class="form-text">We'll never share your email with anyone else.</div>
+    <div class="invalid-feedback">
+      Please provide a valid email.
+    </div>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name='password'>
+    <input type="password" class="form-control" id="password" name='password' required>
+    <div class="invalid-feedback">
+      Please provide a valid password.
+    </div>
+  
   </div>
   <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Agree to the Terms and Conditions</label>
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+    <label class="form-check-label" for="invalidCheck">Agree to the Terms and Conditions</label>
+          <div class="invalid-feedback">
+        You must agree before submitting.
+      </div>
   </div>
+  
   <button type="submit" class="btn btn-dark">Sign Up!</button>
 </form>
+
+
+<script>
+(function () {
+'use strict'
+const forms = document.querySelectorAll('.requires-validation')
+Array.from(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+    if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+    }
+  
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

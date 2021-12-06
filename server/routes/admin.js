@@ -1,9 +1,25 @@
 const router = require('express').Router();
+const {check, validationResult} = require('express-validator');
 const {Product} = require('../db/index');
+
+const productChecks = [
+  check('title')
+      .notEmpty(),
+  check('price')
+      .notEmpty()
+      .isCurrency(),
+  check('description')
+      .notEmpty(),
+  check('category')
+      .notEmpty,
+  check('image')
+      .notEmpty()
+      .isURL(),
+];
 
 router.get('/admin/newProduct', (req, res, next) => {
   try {
-    //need to verify that person is admin
+    // need to verify that person is admin
     console.log(req);
     res.render('addProduct');
   } catch (error) {
@@ -11,8 +27,12 @@ router.get('/admin/newProduct', (req, res, next) => {
   }
 });
 
-router.post('/admin/newProduct', async (req, res, next) => {
+router.post('/admin/newProduct', productChecks, async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(404).json({errors: errors.array()});
+    }
     const product = await Product.create(req.body);
     res.render('singleProduct', product);
   } catch (error) {
@@ -20,15 +40,24 @@ router.post('/admin/newProduct', async (req, res, next) => {
   }
 });
 
-router.post('/products/:productId/update', async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.productId);
-    await product.update(req.body);
-    res.render('singleProduct', product);
-  } catch (error) {
-    next(error);
-  }
-});
+
+router.post(
+    '/updateproduct/:productId/update',
+    productChecks,
+    async (req, res, next) => {
+      try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(404).json({errors: errors.array()});
+        }
+        const product = await Product.findByPk(req.params.productId);
+        await product.update(req.body);
+        res.render('singleProduct', product);
+      } catch (error) {
+        next(error);
+      }
+    });
+
 
 router.get('/products/:productId/update', async (req, res, next) => {
   try {
