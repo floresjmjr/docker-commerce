@@ -17,6 +17,7 @@ router.get('/login', async (req, res) => {
 
 // verify user exist, and return user data if they do
 router.post('/login', async (req, res) => {
+  console.log('req.body: ', req.body);
   try {
     // check user by email
     const [user] = await User.findAll({
@@ -25,18 +26,19 @@ router.post('/login', async (req, res) => {
       },
     });
 
-    console.log(`found user: `, user);
-    console.log(`password given: `, req.body.password);
-    console.log('user.password = ', user.password);
+    // check if account with email exists
+    if (!user) {
+      throw new Error('No user associated with email');
+    }
+
+
     // check if password matches
-    if (user.password === req.body.password) {
-      res.send(`<h3> Welcome back ${user.name}! </h3>`);
-    } else {
+    if (user.password !== req.body.password) {
       throw new Error('Password does not match user');
     }
+
+    res.send(`<h3>Welcome back ${user.name}!</h3>`);
   } catch (err) {
-    //! id LOVE to split this into two errors, 
-    // letting user know if email exists vefore password does not match
     console.error(err);
   }
 });
