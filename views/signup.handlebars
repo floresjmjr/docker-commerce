@@ -14,15 +14,25 @@
    <div class="mb-3">
     <label for="name" class="form-label">Name</label>
     <input type="input" class="form-control" id="name" name='name' required>
+    <div class="invalid-feedback">
+      Please provide a valid name.
+    </div>
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' required>
     <div id="email" class="form-text">We'll never share your email with anyone else.</div>
+    <div class="invalid-feedback">
+      Please provide a valid email.
+    </div>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
     <input type="password" class="form-control" id="password" name='password' required>
+    <div class="invalid-feedback">
+      Please provide a valid password.
+    </div>
+  
   </div>
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
