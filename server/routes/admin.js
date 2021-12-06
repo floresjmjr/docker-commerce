@@ -20,7 +20,7 @@ router.post('/admin/newProduct', async (req, res, next) => {
   }
 });
 
-router.post('/updateproduct/:productId/update', async (req, res, next) => {
+router.post('/products/:productId/update', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
     await product.update(req.body);
@@ -30,7 +30,7 @@ router.post('/updateproduct/:productId/update', async (req, res, next) => {
   }
 });
 
-router.get('/product/:productId/update', async (req, res, next) => {
+router.get('/products/:productId/update', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
     res.render('updateProduct', {product: product});

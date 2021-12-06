@@ -1,7 +1,7 @@
-<section id='updateProductSection'>
+<section id='productFormSection'>
+  <h2>Update Product</h2>
   {{#with product}}
-  <h2>Update Product Item</h2>
-  <form action='/updateproduct/{{id}}/update' method='POST' id='updateProductForm'>
+  <form action='/products/{{id}}/update' method='POST' id='productForm'>
     <ul>
       <li>
         <label for='title'>Title</label>
@@ -13,7 +13,7 @@
       </li>
       <li>
         <label for='category'>Category</label>
-        <input type='text' id='category' name='category' value="{{category}}"/>
+        <input type='text' id='category' name='category' value="{{category}}" />
       </li>
       <li>
         <label for='image'>Image</label>
@@ -21,11 +21,20 @@
       </li>
       <li>
         <label for='description'>Description</label>
-        <textarea rows='4' cols='50' id='description' name='description'>{{description}}
+        <textarea rows='7' cols='50' id='description' name='description'>{{description}}
         </textarea>
       </li>
     </ul>
-    <button type='submit'>Update Product</button>
+    <div id='relatedToForm'>
+      <div id='imagePreview'>
+        <p>Image Preview</p>
+        <img src="{{image}}" />
+      </div>
+      <div id='formButtons'>
+        <button id='resetButton'>Clear</button>
+        <button type='submit'>Update</button>
+      </div>
+    </div>
   </form>
   {{/with}}
 </section>

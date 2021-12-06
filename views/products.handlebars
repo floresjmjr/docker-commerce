@@ -1,19 +1,17 @@
-<main>
   <section id="sectionProducts">
       {{!-- {{#if admin}} --}}
     <div id="productsSubNav">
       <a href="/admin/newProduct">Add Product</a>
     </div>
       {{!-- {{/if}} --}}
-    <div id="productsListContainer">
       <ul id="productsList"> 
       {{#each products}}
-        <li class="products">
+        <li class="productContainer">
           <a href="/products/{{id}}">
             <div class="productPictureContainer">
               <img src="{{image}}" />
             </div>
-            <p>{{title}}<p>
+            <p>{{title}}</p>
           </a>
             <div class="priceContainer">
                 {{!-- {{#if admin}} --}}
@@ -27,6 +25,4 @@
         </li>
       {{/each}}
       </ul> 
-    </div>
-  <section>
-</main>
+  </section>
