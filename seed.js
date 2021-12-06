@@ -4,7 +4,6 @@ const path = require('path');
 const {Product, User, Order}= require('./server/db');
 
 
-
 // dont have User or order info to seed
 
 const seedProduct = async ()=>{
@@ -36,59 +35,59 @@ const seedUser = async ()=>{
   console.log('User data has been successfully populated into our table');
 };
 
-//Creates order for each user
-//At time of writing, User did not habe orders by default
+// Creates order for each user
+// At time of writing, User did not habe orders by default
 const seedUserOrders = async () => {
-    // find the path to our json file
-    const seedPath = path.join(__dirname, 'seeds/order.json');
+  // find the path to our json file
+  const seedPath = path.join(__dirname, 'seeds/order.json');
 
-    const buffer = await fs.readFile(seedPath);
-    const orders = JSON.parse(String(buffer));
-  
-    // will create each row for our Or Table
-    const orderPromises = orders.map((order) => Order.create(order));
-  
-    await Promise.all(orderPromises);
-    console.log('Order data has been successfully populated into our table');
-}
+  const buffer = await fs.readFile(seedPath);
+  const orders = JSON.parse(String(buffer));
 
-//Fills carts with products
+  // will create each row for our Or Table
+  const orderPromises = orders.map((order) => Order.create(order));
+
+  await Promise.all(orderPromises);
+  console.log('Order data has been successfully populated into our table');
+};
+
+// Fills carts with products
 const seedCart = async () =>{
-    // find the path to our json file
-    const seedPath = path.join(__dirname, 'seeds/orderProduct.json');
+  // find the path to our json file
+  const seedPath = path.join(__dirname, 'seeds/orderProduct.json');
 
-    const buffer = await fs.readFile(seedPath);
-    const orderProducts = JSON.parse(String(buffer));
-  
-    // will create each row for our Product Table
-    const orderProductPromises = orderProducts.map(async (orderProduct) => {
-      //get Order we are adding Item to
-      const order = await Order.findByPk(orderProduct.OrderId);
+  const buffer = await fs.readFile(seedPath);
+  const orderProducts = JSON.parse(String(buffer));
 
-      //get Product to add
-      const product = await Product.findByPk(orderProduct.ProductId);
-      
-      //add association row
-      await order.addProduct(product);
-    });
-  
-    await Promise.all(orderProductPromises);
-    console.log('Products have successfully been added to Orders');
-}
+  // will create each row for our Product Table
+  const orderProductPromises = orderProducts.map(async (orderProduct) => {
+    // get Order we are adding Item to
+    const order = await Order.findByPk(orderProduct.OrderId);
+
+    // get Product to add
+    const product = await Product.findByPk(orderProduct.ProductId);
+
+    // add association row
+    await order.addProduct(product);
+  });
+
+  await Promise.all(orderProductPromises);
+  console.log('Products have successfully been added to Orders');
+};
 
 
 const seed = async () => {
-  console.log("seeding Database...");
+  console.log('seeding Database...');
   await db.sync({force: true});
-  console.log("DB cleared");
+  console.log('DB cleared');
   await seedProduct();
   await seedUser();
   await seedUserOrders();
   await seedCart();
-  console.log("DB successfully seeded");
-}
+  console.log('DB successfully seeded');
+};
 
 // export the seed function
-  // Why?
+// Why?
 
 seed();
