@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {check, validationResult} = require('express-validator');
 const {Product} = require('../db/index');
 
-const newProductChecks = [
+const productChecks = [
   check('title')
       .notEmpty(),
   check('price')
@@ -27,7 +27,7 @@ router.get('/admin/newProduct', (req, res, next) => {
   }
 });
 
-router.post('/admin/newProduct', newProductChecks, async (req, res, next) => {
+router.post('/admin/newProduct', productChecks, async (req, res, next) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -40,15 +40,22 @@ router.post('/admin/newProduct', newProductChecks, async (req, res, next) => {
   }
 });
 
-router.post('/updateproduct/:productId/update', async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.productId);
-    await product.update(req.body);
-    res.render('singleProduct', product);
-  } catch (error) {
-    next(error);
-  }
-});
+router.post(
+    '/updateproduct/:productId/update',
+    productChecks,
+    async (req, res, next) => {
+      try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(404).json({errors: errors.array()});
+        }
+        const product = await Product.findByPk(req.params.productId);
+        await product.update(req.body);
+        res.render('singleProduct', product);
+      } catch (error) {
+        next(error);
+      }
+    });
 
 router.get('/product/:productId/update', async (req, res, next) => {
   try {
