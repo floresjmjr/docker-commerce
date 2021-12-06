@@ -1,19 +1,24 @@
 const Product = require('../models/Product');
-const {db} = require('../db');
-
+// const {db} = require('../db');
 describe('the functionality of the Product model', () => {
-  beforeAll(async () => {
-    await db.sync({force: true});
-  });
   test('creating an Product instance', async () => {
-    const jacket = await Product.create({
-      title: 'Mens Cotton Jacket',
-      price: 55.99,
-      description:
-        'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
-      category: 'men\'s clothing',
-      image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
-    });
-    expect(jacket.title).toBe('Mens Cotton Jacket');
+    const testProduct = await Product.findByPk(1);
+    expect(testProduct.title)
+        .toBe('Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops');
+    expect(testProduct.price).toBe(109.95);
+    expect(typeof testProduct.description).toBe('string');
+    expect(typeof testProduct.price).toBe('number');
+    expect(testProduct.category).toBe('men\'s clothing');
+    expect(testProduct.image).toBe('https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg');
+  });
+  test('findByCategory Method functionality', async ()=>{
+    const testProductElectonics = await Product.findByCategory('electronics');
+    testProductElectonics.forEach((elem) =>
+      expect(elem.category).toBe('electronics'));
+  });
+  test('findByPrice Method functionality', async ()=>{
+    const testAffordableProducts = await Product.findByPrice(20);
+    testAffordableProducts.forEach(elem =>
+      expect(elem.price).toBeLessThanOrEqual(20))
   });
 });
