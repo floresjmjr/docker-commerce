@@ -1,44 +1,28 @@
-<section>
-	<h2>Browse our products!</h2>
-  <div class="row row-cols-1 row-cols-md-3 g-4"></div>
-	{{#each products}} <!-- for each sauce in products, create this html -->
-  
-
-  <div class="card" style="width: 18rem;">
-  <img src="{{image}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{title}}</h5>
-    <p class="card-text">{{price}}</p>
-  </div>
-</div>
-
-	{{/each}}
-  </div>
-</section>
-
-
-{{!-- <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
+  <section id="sectionProducts">
+      {{!-- {{#if admin}} --}}
+    <div id="productsSubNav">
+      <a href="/admin/newProduct">Add Product</a>
     </div>
-  </div>  
-</div> --}}
-
-
-{{!-- <section>
-	<h2>Browse our products!</h2>
-	{{#each products}} <!-- for each sauce in products, create this html -->
-		<article>
-    <a class="btn" href="/products/{{id}}">
-			<img class="item-img" src="{{image}}" />
-      <h2>{{title}}</h2>
-      <p>${{price}}</p>
-			</a>
-		</article>
-	{{/each}}
-</section> --}}
+      {{!-- {{/if}} --}}
+      <ul id="productsList"> 
+      {{#each products}}
+        <li class="productContainer">
+          <a href="/products/{{id}}">
+            <div class="productPictureContainer">
+              <img src="{{image}}" />
+            </div>
+            <p>{{title}}</p>
+          </a>
+            <div class="priceContainer">
+                {{!-- {{#if admin}} --}}
+                <form action="/product/{{id}}" method="POST">
+                  <input type="text" name="id" value={{id}} hidden/>
+                  <input id='deleteProductButton' type='submit' value='Delete'>
+                </form>
+                {{!-- {{/if}} --}}
+              <p>${{price}}</p>
+            </div>
+        </li>
+      {{/each}}
+      </ul> 
+  </section>

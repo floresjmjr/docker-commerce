@@ -1,0 +1,73 @@
+
+#productsList {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  gap: 80px 10px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#sectionProducts {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 1300px;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Sets the box sizes for the product items so we can have equal spacing between them as the pictures are different sizes */
+.productContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 300px;
+  border-bottom: 1px solid #b1b2b5;
+  padding: 10px 0;
+}
+
+.productContainer img {
+  width: 150px;
+  max-height: 150px;
+}
+
+#productsSubNav {
+  display: flex;
+  justify-content: flex-end;
+  margin: 40px
+}
+
+#productsSubNav a {
+  margin-left: 20px;
+  background: #b1b2b5;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#sectionProducts a {
+  text-decoration: none;
+  color: black;
+}
+
+.productPictureContainer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.productContainer p {
+  margin: 0 30px;
+  max-width: 250px;
+  padding: 0;
+  font-size: 12px;
+}
+
+.priceContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
