@@ -62,9 +62,6 @@ router.post('/login', async (req, res) => {
       },
     });
 
-    const cartItems = user.Orders[0].Products;
-
-
     // check if account with email exists
     if (!user) {
       throw new Error('No user associated with email');
@@ -74,19 +71,21 @@ router.post('/login', async (req, res) => {
     if (user.password !== req.body.password) {
       throw new Error('Password does not match user');
     }
-    
-    console.log('should match app.locals: ', res.app.locals);
-    res.app.locals.user = user;
-    console.log('app.locals should have updated: ', res.app.locals);
 
-      //! This is a place holder for MVP.
-      //! This should return a json of the user to be stored locally
+    res.app.locals.user = user;
+    const cartItems = user.Orders[0].Products;
+
     res.redirect(`/`);
   } catch (err) {
     console.error(err);
   }
 });
 
+
+router.get('/logout', async (req, res) => {
+  res.app.locals.user = undefined;
+  res.redirect('/');
+});
 
 // get logged in user(and will display account page)
 router.get('/:id', async (req, res) => {
