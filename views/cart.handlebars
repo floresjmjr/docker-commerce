@@ -9,12 +9,15 @@
           <h3 id="title">{{title}}</h3>
           <div id="sub-title">
             <p id="category">{{category}}</p>
-            <p id="price">{{price}}</p>
+            
           </div>
           <p id="description">{{description}}</p> 
           <div id="foot">
-            <p id="quantity">Quantity: 1</p> <!-- Does nothing yet-->
-            <button>Remove</button> <!-- Does nothing yet-->
+            <div id="left">
+              <a href="">Remove</a> <!-- Does nothing yet-->
+              <p id="quantity">Quantity: 1</p> <!-- Does nothing yet-->
+            </div>
+            <p id="price">${{price}}</p>
           </div>
         </div>
       </div>
@@ -28,7 +31,7 @@
     <div id="overview">
       <!-- we will want to do some js magic here-->
       {{#each cartItems}}
-        <p id="cost-value">{{price}}</p>
+        <p id="cost-value">${{price}}</p>
       {{/each}}
       <!-- some kind of divide -->
       <p id="total">$x.xx</p>
