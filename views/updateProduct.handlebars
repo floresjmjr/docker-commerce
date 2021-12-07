@@ -1,40 +1,40 @@
 <section id='productFormSection'>
   <h2>Update Product</h2>
   {{#with product}}
-  <form action='/products/{{id}}/update' method='POST' id='productForm'>
-    <ul>
-      <li>
-        <label for='title'>Title</label>
-        <input type='text' id='title' name='title' value="{{title}}" required/>
-      </li>
-      <li>
-        <label for='price'>Price</label>
-        <input type='number' id='price' name='price' value="{{price}}" required/>
-      </li>
-      <li>
-        <label for='category'>Category</label>
-        <input type='text' id='category' name='category' value="{{category}}" required/>
-      </li>
-      <li>
-        <label for='image'>Image</label>
-        <input type='url' id='image' name='image' value="{{image}}" required/>
-      </li>
-      <li>
-        <label for='description'>Description</label>
-        <textarea rows='7' cols='50' id='description' name='description' required>{{description}}
-        </textarea>
-      </li>
-    </ul>
-    <div id='relatedToForm'>
-      <div id='imagePreview'>
-        <p>Image Preview</p>
-        <img src="{{image}}" />
-      </div>
-      <div id='formButtons'>
-        <button id='resetButton'>Clear</button>
-        <button type='submit'>Update</button>
+    <div action='/products/{{id}}/update' method='PUT' id='productForm'>
+      <ul>
+        <li>
+          <label for='title'>Title</label>
+          <input type='text' id='title' name='title' value='{{title}}' required />
+        </li>
+        <li>
+          <label for='price'>Price</label>
+          <input type='number' id='price' name='price' value='{{price}}' required />
+        </li>
+        <li>
+          <label for='category'>Category</label>
+          <input type='text' id='category' name='category' value='{{category}}' required />
+        </li>
+        <li>
+          <label for='image'>Image</label>
+          <input type='url' id='image' name='image' value='{{image}}' required />
+        </li>
+        <li>
+          <label for='description'>Description</label>
+          <textarea rows='7' cols='50' id='description' name='description' required>{{description}}
+          </textarea>
+        </li>
+      </ul>
+      <div id='relatedToForm'>
+        <div id='imagePreview'>
+          <p>Image Preview</p>
+          <img src='{{image}}' />
+        </div>
+        <div id='formButtons'>
+          <button id='resetButton'>Clear</button>
+          <button id='updateProductButton'>Update</button>
+        </div>
       </div>
     </div>
-  </form>
   {{/with}}
 </section>
