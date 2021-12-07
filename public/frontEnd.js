@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (server.status === 200) {
           console.log('status 200 in event');
 
-          const productNode = e.target.parentNode.parentNode.parentNode;
+          const productNode = e.target.parentNode.parentNode.parentNode.parentNode;
           productNode.remove();
         }
       });
