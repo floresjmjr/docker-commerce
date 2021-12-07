@@ -20,6 +20,45 @@ class Product extends Model {
         }}});
     return affordableItems;
   }
+  // order items from low to high price
+  static async priceLowToHigh() {
+    const products = await Product.findAll({
+      order: [
+        'price', 'ASC',
+      ],
+    });
+    return products;
+  }
+  // order items from high to low price
+  static async priceHighToLow() {
+    const products = await Product.findAll({
+      order: [
+        'price', 'DESC',
+      ],
+    });
+    return products;
+  }
+  // find items by search bar (might be case sensitive)
+  static async searchByPhrase(reqQuery) {
+    const {query} = reqQuery;
+    const searchResults = await Product.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${query}%`,
+            },
+          },
+          {
+            description: {
+              [Op.like]: `%${query}%`,
+            },
+          },
+        ],
+      },
+    });
+    return searchResults;
+  }
 }
 
 Product.init({
