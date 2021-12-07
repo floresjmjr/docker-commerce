@@ -1,28 +1,25 @@
-  <section id="sectionProducts">
-      {{!-- {{#if admin}} --}}
-    <div id="productsSubNav">
-      <a href="/admin/newProduct">Add Product</a>
-    </div>
-      {{!-- {{/if}} --}}
-      <ul id="productsList"> 
-      {{#each products}}
-        <li class="productContainer">
-          <a href="/products/{{id}}">
-            <div class="productPictureContainer">
-              <img src="{{image}}" />
-            </div>
-            <p>{{title}}</p>
-          </a>
-            <div class="priceContainer">
-                {{!-- {{#if admin}} --}}
-                <form action="/product/{{id}}" method="POST">
-                  <input type="text" name="id" value={{id}} hidden/>
-                  <input id='deleteProductButton' type='submit' value='Delete'>
-                </form>
-                {{!-- {{/if}} --}}
-              <p>${{price}}</p>
-            </div>
-        </li>
-      {{/each}}
-      </ul> 
-  </section>
+<section id='sectionProducts'>
+  {{!-- {{#if admin}} --}}
+  <div id='productsSubNav'>
+    <a href='/admin/newProduct'>Add Product</a>
+  </div>
+  {{!-- {{/if}} --}}
+  <ul id='productsList'>
+    {{#each products}}
+      <li class='productContainer'>
+        <a href='/products/{{id}}'>
+          <div class='productPictureContainer'>
+            <img src='{{image}}' />
+          </div>
+          <p>{{title}}</p>
+        </a>
+        <div class='priceContainer'>
+          {{!-- {{#if admin}} --}}
+          <button class='deleteButton' value={{id}}>Delete</button>
+          {{!-- {{/if}} --}}
+          <p>${{price}}</p>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</section>
