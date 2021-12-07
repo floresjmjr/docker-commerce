@@ -37,8 +37,28 @@ router.post('/signup', signupChecks, async (req, res)=>{
 
     return res.render('signup', {validationError});
   }
-  const newUser = await User.create(req.body);
-  res.send(`<h3>Thanks your all signed up</h3>`);
+  // create user
+  const user = await User.create(req.body);
+
+  // give them a cart
+  await user.createOrder({});
+
+  // get new User with orders
+  const [newUser] = await User.findAll({
+    where: {id: user.id},
+    include: {
+      model: Order,
+      include: Product,
+    },
+  });
+
+  // console.log('created new user: ', newUser);
+  // console.log('new user after adding order: ', newUser.Orders);
+  
+  // auto login
+  res.app.locals.user = newUser;
+
+  res.redirect(`/`);
 });
 
 // login page
@@ -62,9 +82,6 @@ router.post('/login', async (req, res) => {
       },
     });
 
-    const cartItems = user.Orders[0].Products;
-
-
     // check if account with email exists
     if (!user) {
       throw new Error('No user associated with email');
@@ -75,18 +92,20 @@ router.post('/login', async (req, res) => {
       throw new Error('Password does not match user');
     }
 
-    console.log('should match app.locals: ', res.app.locals);
     res.app.locals.user = user;
-    console.log('app.locals should have updated: ', res.app.locals);
+    const cartItems = user.Orders[0].Products;
 
-    // ! This is a place holder for MVP.
-    // ! This should return a json of the user to be stored locally
     res.redirect(`/`);
   } catch (err) {
     console.error(err);
   }
 });
 
+
+router.get('/logout', async (req, res) => {
+  res.app.locals.user = undefined;
+  res.redirect('/');
+});
 
 // get logged in user(and will display account page)
 router.get('/:id', async (req, res) => {
