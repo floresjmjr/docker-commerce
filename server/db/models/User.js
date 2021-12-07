@@ -16,7 +16,6 @@ User.init({
   password: DataTypes.STRING,
   email: DataTypes.STRING,
   phone: DataTypes.INTEGER,
-
 }, {
   sequelize: db,
   timestamps: false,
