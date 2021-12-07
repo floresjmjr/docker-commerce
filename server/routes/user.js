@@ -49,7 +49,6 @@ router.get('/login', async (req, res) => {
 
 // verify user exist, and return user data if they do
 router.post('/login', async (req, res) => {
-  console.log('req.body: ', req.body);
   try {
     // check user by email
     const [user] = await User.findAll({
@@ -61,8 +60,8 @@ router.post('/login', async (req, res) => {
         include: Product,
       },
     });
-
-    const cartItems = user.Orders[0].Products;
+    // new phone who dis????????????
+    // const cartItems = user.Orders[0].Products;
 
 
     // check if account with email exists
