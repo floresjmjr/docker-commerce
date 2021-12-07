@@ -17,7 +17,6 @@ Handlebars.registerHelper('isdefined', function(value) {
 app.set('view engine', 'handlebars');
 
 // User global variable setup
-console.log('app.locals: ', app.locals);
 
 
 app.use(express.static('public'));
