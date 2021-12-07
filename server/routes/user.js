@@ -25,7 +25,6 @@ const signupChecks = [
 // let validatationError;
 
 
-
 router.get('/signup', async (req, res)=>{
   res.render('signup');
 });
@@ -46,6 +45,7 @@ router.post('/signup', signupChecks, async (req, res)=>{
 router.get('/login', async (req, res) => {
   res.render('login');
 });
+
 
 // verify user exist, and return user data if they do
 router.post('/login', async (req, res) => {
@@ -75,13 +75,18 @@ router.post('/login', async (req, res) => {
       throw new Error('Password does not match user');
     }
     
+    console.log('should match app.locals: ', res.app.locals);
+    res.app.locals.user = user;
+    console.log('app.locals should have updated: ', res.app.locals);
+
       //! This is a place holder for MVP.
       //! This should return a json of the user to be stored locally
-    res.render(`cart`, {cartItems});
+    res.redirect(`/`);
   } catch (err) {
     console.error(err);
   }
 });
+
 
 // get logged in user(and will display account page)
 router.get('/:id', async (req, res) => {

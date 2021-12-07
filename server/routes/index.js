@@ -8,6 +8,7 @@ Handlebars.registerHelper('isdefined', function(value) {
 // router.use('/apiroute', require('./yourfilepath'))
 router.use('/user', require('./user'));
 router.use('/products', require('./products'));
+router.use('/cart', require('./cart'));
 router.use('/', require('./admin'));
 
 // 404 Error handler

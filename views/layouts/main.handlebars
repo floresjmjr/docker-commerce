@@ -18,8 +18,12 @@
       <div id="headerNavContainer">
         <a href="/products">Home</a>
         <div id="cartUserContainer">
-          <a href="">Cart</a>
-          <a href="/user/login">User</a>  
+          {{#if user}}
+            <a href="/cart">Cart</a>
+            <a href="">Logout</a>
+          {{else}}
+            <a href="/user/login">Login</a>
+          {{/if}}
         </div>
       </div>
       <div id="categoryLinks">
