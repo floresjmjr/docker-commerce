@@ -37,8 +37,28 @@ router.post('/signup', signupChecks, async (req, res)=>{
 
     return res.render('signup', {validationError});
   }
-  const newUser = await User.create(req.body);
-  res.send(`<h3>Thanks your all signed up</h3>`);
+  // create user
+  const user = await User.create(req.body);
+
+  // give them a cart
+  await user.createOrder({});
+
+  // get new User with orders
+  const [newUser] = await User.findAll({
+    where: {id: user.id},
+    include: {
+      model: Order,
+      include: Product,
+    },
+  });
+
+  // console.log('created new user: ', newUser);
+  // console.log('new user after adding order: ', newUser.Orders);
+  
+  // auto login
+  res.app.locals.user = newUser;
+
+  res.redirect(`/`);
 });
 
 // login page
