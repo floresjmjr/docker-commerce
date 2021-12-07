@@ -11,11 +11,22 @@ const productChecks = [
   check('image').notEmpty().isURL(),
 ];
 
+function checkIfAdmin(user) {
+  if (user) {
+    return user.type === 'Admin';
+  }
+  return false;
+}
+
 //Admin views the page to create a new product
 router.get('/admin/newProduct', (req, res, next) => {
   try {
-    // need to verify that person is admin
-    res.render('addProduct');
+    if (checkIfAdmin(res.app.locals.user)) {
+      res.render('addProduct');
+    } else {
+      //Need a unauthorized page
+      res.send("You're not authorized");
+    }
   } catch (error) {
     next(error);
   }
@@ -24,12 +35,17 @@ router.get('/admin/newProduct', (req, res, next) => {
 //Admin creates a new product for sale
 router.post('/admin/newProduct', productChecks, async (req, res, next) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(404).json({errors: errors.array()});
+    if (checkIfAdmin(res.app.locals.user)) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(404).json({errors: errors.array()});
+      }
+      const product = await Product.create(req.body);
+      res.render('singleProduct', product);
+    } else {
+      //Need a unauthorized page
+      res.send("You're not authorized");
     }
-    const product = await Product.create(req.body);
-    res.render('singleProduct', product);
   } catch (error) {
     next(error);
   }
@@ -38,13 +54,18 @@ router.post('/admin/newProduct', productChecks, async (req, res, next) => {
 // Admin updates the product information
 router.put('/products/:productId/update', productChecks, async (req, res, next) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(404).json({errors: errors.array()});
+    if (checkIfAdmin(res.app.locals.user)) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(404).json({errors: errors.array()});
+      }
+      const product = await Product.findByPk(req.params.productId);
+      await product.update(req.body);
+      res.status(200).json({id: req.params.productId});
+    } else {
+      //Need a unauthorized page
+      res.send("You're not authorized");
     }
-    const product = await Product.findByPk(req.params.productId);
-    await product.update(req.body);
-    res.status(200).json({id: req.params.productId});
   } catch (error) {
     next(error);
   }
@@ -53,8 +74,13 @@ router.put('/products/:productId/update', productChecks, async (req, res, next) 
 //Admin views the page to update a product
 router.get('/products/:productId/update', async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId);
-    res.render('updateProduct', {product: product});
+    if (checkIfAdmin(res.app.locals.user)) {
+      const product = await Product.findByPk(req.params.productId);
+      res.render('updateProduct', {product: product});
+    } else {
+      //Need a unauthorized page
+      res.send("You're not authorized");
+    }
   } catch (error) {
     next(error);
   }
@@ -63,8 +89,13 @@ router.get('/products/:productId/update', async (req, res, next) => {
 //Admin deletes a product from sale
 router.delete('/products/:productId', async (req, res, next) => {
   try {
-    await Product.destroy({where: {id: req.params.productId}});
-    res.sendStatus(200);
+    if (checkIfAdmin(res.app.locals.user)) {
+      await Product.destroy({where: {id: req.params.productId}});
+      res.sendStatus(200);
+    } else {
+      //Need a unauthorized page
+      res.send("You're not authorized");
+    }
   } catch (error) {
     next(error);
   }
