@@ -8,7 +8,10 @@
         <div class="single-product-category">{{product.category}}</div>
         <div class="single-product-description">{{product.description}}</div>
         <div class="single-product-price">${{product.price}}</div>
-        <button class="single-product-cart-cta">Add to Cart</button>
+        <form action='/products/{{product.id}}' method='POST'>
+            <button  type='submit' class="single-product-cart-cta">Add to Cart</button>
+        </form>
+        
         {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
             <a href="/">Delete Product</a>
         </div> --}}

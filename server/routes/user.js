@@ -74,13 +74,13 @@ router.post('/login', async (req, res) => {
     if (user.password !== req.body.password) {
       throw new Error('Password does not match user');
     }
-    
+
     console.log('should match app.locals: ', res.app.locals);
     res.app.locals.user = user;
     console.log('app.locals should have updated: ', res.app.locals);
 
-      //! This is a place holder for MVP.
-      //! This should return a json of the user to be stored locally
+    // ! This is a place holder for MVP.
+    // ! This should return a json of the user to be stored locally
     res.redirect(`/`);
   } catch (err) {
     console.error(err);
