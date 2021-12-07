@@ -2,17 +2,19 @@ const User = require('../models/User');
 const {db} = require('../db');
 
 describe('the functionality of the User model', () => {
-  beforeAll(async () => {
-    await db.sync({force: true});
+  test('User instance properties', async () => {
+    const testUser = await User.findByPk(1);
+    expect(testUser.type).toBe('Standard');
+    expect(testUser.name).toBe('User');
+    expect(testUser.address).toBe('123 Somewhere St.');
+    expect(testUser.phone).toBe(1234567890);
+    expect(typeof testUser.phone).toBe('number');
   });
-  test('creating an User instance', async () => {
-    const robertoInstance = await User.create({
-      name: 'Roberto Gonzales',
-      address: '467 Old Theatre Rd. Carpentersville, IL 60110',
-      password: 'Password',
-      email: 'email@gmail.com',
-      phone: 8113036914,
-    });
-    expect(robertoInstance.name).toBe('Roberto Gonzales');
+
+  test('findByEmail method functionality', async ()=>{
+    const testUserByEmail = await User.findByEmail('user@email.com');
+    expect(testUserByEmail.type).toBe('Standard');
+    expect(testUserByEmail.name).toBe('User');
+    expect(testUserByEmail.address).toBe('123 Somewhere St.');
   });
 });
