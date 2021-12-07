@@ -2,11 +2,13 @@
   <div id="list">
     {{#each cartItems}}
       <div id="product-shelf">
-        <img src="{{image}}"/>
+        <div id="image">
+          <img src="{{image}}"/>
+        </div>
         <div id="details">
-          <p id="title">{{name}}</p>
+          <h3 id="title">{{title}}</h3>
           <div id="sub-title">
-            <p id="category">{{catergory}}</p>
+            <p id="category">{{category}}</p>
             <p id="price">{{price}}</p>
           </div>
           <p id="description">{{description}}</p> 

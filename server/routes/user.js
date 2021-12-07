@@ -54,7 +54,7 @@ router.post('/signup', signupChecks, async (req, res)=>{
 
   // console.log('created new user: ', newUser);
   // console.log('new user after adding order: ', newUser.Orders);
-  
+
   // auto login
   res.app.locals.user = newUser;
 
