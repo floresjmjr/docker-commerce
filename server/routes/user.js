@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 const router = require('express').Router();
 const {check, validationResult} = require('express-validator');
-const {User} = require('../db');
+const {User, Order, Product} = require('../db');
 
 
 const signupChecks = [
@@ -23,6 +23,8 @@ const signupChecks = [
   check('password').notEmpty().withMessage('Password cannot be empty'), // want to make this stronger but the data seeeded will needd to match validations,
 ];
 // let validatationError;
+
+
 
 router.get('/signup', async (req, res)=>{
   res.render('signup');
@@ -54,20 +56,28 @@ router.post('/login', async (req, res) => {
       where: {
         email: req.body.email,
       },
+      include: {
+        model: Order,
+        include: Product,
+      },
     });
+
+    const cartItems = user.Orders[0].Products;
+
 
     // check if account with email exists
     if (!user) {
       throw new Error('No user associated with email');
     }
 
-
     // check if password matches
     if (user.password !== req.body.password) {
       throw new Error('Password does not match user');
     }
-
-    res.send(`<h3>Welcome back ${user.name}!</h3>`);
+    
+      //! This is a place holder for MVP.
+      //! This should return a json of the user to be stored locally
+    res.render(`cart`, {cartItems});
   } catch (err) {
     console.error(err);
   }
