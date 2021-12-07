@@ -92,9 +92,12 @@ router.post('/login', async (req, res) => {
       throw new Error('Password does not match user');
     }
 
-    res.app.locals.user = user;
-    const cartItems = user.Orders[0].Products;
 
+    res.app.locals.user = user;
+
+
+    // ! This is a place holder for MVP.
+    // ! This should return a json of the user to be stored locally
     res.redirect(`/`);
   } catch (err) {
     console.error(err);
