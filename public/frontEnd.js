@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  //Make custom requests to the server
+  // Make custom requests to the server
   function makeRequest(method, url, data = '') {
     const request = new XMLHttpRequest();
     request.open(method, url);
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  //Delete eventhandler function
+  // Delete eventhandler function
   function deleteProduct(node) {
     try {
       node.addEventListener('click', async (e) => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  //Admin Delete (All Products) Functionality
+  // Admin Delete (All Products) Functionality
   const delBtnNodes = document.querySelectorAll('.deleteButton');
   if (delBtnNodes.length) {
     for (el of delBtnNodes) {
@@ -52,13 +52,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  //Admin Delete (Single Product) Functionlity
+  // Admin Delete (Single Product) Functionlity
   const delBtnNode = document.querySelector('#single-product-delete-button');
   if (delBtnNode) {
     deleteProduct(delBtnNode);
   }
+  // remove item from cart
+  function removeItemFromCart(node) {
+    try {
+      node.addEventListener('click', async (e) => {
+        console.log('CLICK ME HEHE');
+        const path = `${window.location.href}/${e.target.value}`;
+        console.log(path);
+        const server = await makeRequest('DELETE', path);
+        console.log('response1', server.status);
+        if (server.status === 200) {
+          console.log('status 200 in event');
 
-  //Admin Update Product Functionality
+          const productNode = e.target.parentNode.parentNode.parentNode.parentNode;
+          productNode.remove();
+        }
+      });
+    } catch (error) {
+      console.error(`Error message on the front-end: ${error}`);
+    }
+  }
+
+  // cart remove item functionality
+  const remBtnNodes = document.querySelectorAll('.cartRemove');
+  if (remBtnNodes.length) {
+    for (el of remBtnNodes) {
+      removeItemFromCart(el);
+    }
+  }
+
+  // Admin Update Product Functionality
   const updateButton = document.getElementById('updateProductButton');
   if (updateButton) {
     updateButton.addEventListener('click', async () => {
