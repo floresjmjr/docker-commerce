@@ -3,12 +3,17 @@
     <div class="single-product-text-container">
         <div class="single-product-title">
             {{product.title}}
-            {{!-- <span class="single-product-admin-button"><a href="/">Edit Product</a></span> --}}
+            {{#if admin}}
+              <span class="single-product-admin-button"><a href="/products/{{product.id}}/update">Edit Product</a></span>
+            {{/if}}
         </div>
         <div class="single-product-category">{{product.category}}</div>
         <div class="single-product-description">{{product.description}}</div>
         <div class="single-product-price">${{product.price}}</div>
-        <button class="single-product-cart-cta">Add to Cart</button>
+        <form action='/products/{{product.id}}' method='POST'>
+            <button  type='submit' class="single-product-cart-cta">Add to Cart</button>
+        </form>
+        
         {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
             <a href="/">Delete Product</a>
         </div> --}}

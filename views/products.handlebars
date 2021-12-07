@@ -1,25 +1,39 @@
 <section id='sectionProducts'>
-  {{!-- {{#if admin}} --}}
-  <div id='productsSubNav'>
-    <a href='/admin/newProduct'>Add Product</a>
-  </div>
-  {{!-- {{/if}} --}}
+  {{#if admin}}
+    <div id='productsSubNav'>
+      <a href='/admin/newProduct'>Add Product</a>
+    </div>
+  {{/if}}
   <ul id='productsList'>
-    {{#each products}}
-      <li class='productContainer'>
-        <a href='/products/{{id}}'>
-          <div class='productPictureContainer'>
-            <img src='{{image}}' />
+    {{#if admin}}
+      {{#each products}}
+        <li class='productContainer'>
+          <a href='/products/{{id}}'>
+            <div class='productPictureContainer'>
+              <img src='{{image}}' />
+            </div>
+            <p>{{title}}</p>
+          </a>
+          <div class='priceContainer'>
+            <button class='deleteButton' value={{id}}>Delete</button>
+            <p>${{price}}</p>
           </div>
-          <p>{{title}}</p>
-        </a>
-        <div class='priceContainer'>
-          {{!-- {{#if user.type == "admin"}} --}}
-          <button class='deleteButton' value={{id}}>Delete</button>
-          {{!-- {{/if}} --}}
-          <p>${{price}}</p>
-        </div>
-      </li>
-    {{/each}}
+        </li>
+      {{/each}}
+    {{else}}
+      {{#each products}}
+        <li class='productContainer'>
+          <a href='/products/{{id}}'>
+            <div class='productPictureContainer'>
+              <img src='{{image}}' />
+            </div>
+            <p>{{title}}</p>
+          </a>
+          <div class='priceContainer'>
+            <p>${{price}}</p>
+          </div>
+        </li>
+      {{/each}}
+    {{/if}}
   </ul>
 </section>
