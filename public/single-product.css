@@ -1,6 +1,15 @@
+@media only screen and (max-width: 799px) {
+    section.single-product-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 section.single-product-container {
     display: flex;
     justify-content: space-evenly;
+    padding: 5% 5% 0% 5%;
+    gap: 10px;
 }
 
 div.single-product-text-container {
@@ -17,19 +26,27 @@ img.single-product-image {
 
 div.single-product-title {
     font-size: 36px;
+    font-weight: 600;
 }
 
 div.single-product-category {
     font-size: 18px;
+    font-weight: 500;
 }
 
 div.single-product-price {
     align-self: flex-end;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
+    padding-top: 30px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+form.single-product-cart-form {
+    align-self: flex-end;
 }
 
 button.single-product-cart-cta {
-    align-self: flex-end;
     background-color: #ecfc1b;
     border-radius: 5px;
 }
