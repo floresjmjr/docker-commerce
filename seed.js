@@ -13,8 +13,28 @@ const seedProduct = async ()=>{
   const buffer = await fs.readFile(seedPath);
   const products = JSON.parse(String(buffer));
 
+  // formating product properties
+  function capitalize(string) {
+    let wordArr = string.trim().split(' ');
+    formattedArr = wordArr.map((word) => {
+      return word[0].toUpperCase() + word.substring(1).toLowerCase();
+    });
+    string = formattedArr.join(' ');
+    return string;
+  }
+
   // will create each row for our Product Table
-  const productPromises = products.map((product) => Product.create(product));
+  const productPromises = products.map((product) => 
+  {
+    product.category = capitalize(product.category)
+    if(!(product.category === 'Electronics')){
+      product.title = capitalize(product.title)
+    }
+    console.log('category')
+    product.price = Number(product.price.toFixed(2))
+    console.log(product)
+    return Product.create(product)
+  });
 
   await Promise.all(productPromises);
   console.log('product data has been successfully populated into our table');

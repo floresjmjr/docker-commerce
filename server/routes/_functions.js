@@ -1,8 +1,18 @@
-function isAdmin(user){
-  if(user){
-    return user.type === 'Admin'
+function isAdmin(user) {
+  if (user) {
+    return user.type === 'Admin';
   }
-  return false
+  return false;
 }
 
-module.exports = {isAdmin}
+function formatDescription(description) {}
+
+
+
+function formatProduct(product) {
+
+
+  return product;
+}
+
+module.exports = {isAdmin, formatProduct};
