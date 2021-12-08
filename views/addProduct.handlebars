@@ -1,26 +1,31 @@
 <section id='productFormSection'>
   <h2>Add Product</h2>
   <form action='/admin/newProduct' method='POST' id='productForm'>
-    <ul>
+    <ul id="formElements">
       <li>
         <label for='title'>Title</label>
-        <input type='text' id='title' name='title' required/>
+        <br />
+        <input type='text' id='title' name='title' class="addProductFormElement" required/>
       </li>
       <li>
         <label for='price'>Price</label>
-        <input type='number' id='price' name='price' required/>
+        <br />
+        <input type='number' id='price' name='price' class="addProductFormElement" required/>
       </li>
       <li>
         <label for='category'>Category</label>
-        <input type='text' id='category' name='category' required/>
+        <br />
+        <input type='text' id='category' name='category'  class="addProductFormElement" required/>
       </li>
       <li>
         <label for='image'>Image</label>
-        <input type='url' id='image' name='image' required />
+        <br />
+        <input type='url' id='image' name='image' class="addProductFormElement" required />
       </li>
       <li>
         <label for='description'>Description</label>
-        <textarea rows='7' cols='50' id='description' name='description' required>
+        <br />
+        <textarea rows='7' cols='50' id='description' class="addProductFormElement" name='description' required>
         </textarea>
       </li>
     </ul>

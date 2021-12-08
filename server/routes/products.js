@@ -54,11 +54,9 @@ router.get('/:id', async (req, res) => {
 
   const context = {
     product: product,
-    admin: false,
+    admin: isAdmin(res.app.locals.user),
   }
-  if(res.app.locals.user){
-    if(res.app.locals.user.type === 'Admin') { context.admin = true;}
-  }
+  console.log('context', context.admin)
   res.render('single-product', context);
 });
 
