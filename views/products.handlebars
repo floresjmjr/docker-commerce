@@ -1,4 +1,8 @@
 <section id='sectionProducts'>
+  <form action='/products/search' method='POST'>
+    <input id='search' type='text' name='search'/>
+    <button type='submit'>Search</button>
+  </form>
   {{#if admin}}
     <div id='productsSubNav'>
       <a href='/admin/newProduct'>Add Product</a>
@@ -15,7 +19,7 @@
             <p>{{title}}</p>
           </a>
           <div class='priceContainer'>
-            <button class='deleteButton' value={{id}}>Delete</button>
+            <button class='deleteButton' value='{{id}}'>Delete</button>
             <p>${{price}}</p>
           </div>
         </li>
@@ -37,3 +41,5 @@
     {{/if}}
   </ul>
 </section>
+<script src="/scripts/products.js"></script>
+

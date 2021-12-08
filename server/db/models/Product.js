@@ -39,19 +39,18 @@ class Product extends Model {
     return products;
   }
   // find items by search bar (might be case sensitive)
-  static async searchByPhrase(reqQuery) {
-    const {query} = reqQuery;
+  static async searchByPhrase(query) {
     const searchResults = await Product.findAll({
       where: {
         [Op.or]: [
           {
             title: {
-              [Op.like]: `%${query}%`,
+              [Op.substring]: `%${query}%`,
             },
           },
           {
             description: {
-              [Op.like]: `%${query}%`,
+              [Op.substring]: `%${query}%`,
             },
           },
         ],

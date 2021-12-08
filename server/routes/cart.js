@@ -4,6 +4,11 @@ const {check, validationResult} = require('express-validator');
 const {User, Order, Product} = require('../db');
 
 router.get('/', async (req, res) => {
+  if (!res.app.locals.user) {
+    res.redirect('/user/login');
+  }
+
+
   let cartItems = await Order.findOne({
     where: {
       userId: res.app.locals.user.id,
