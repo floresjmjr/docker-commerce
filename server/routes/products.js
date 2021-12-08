@@ -2,6 +2,19 @@ const router = require('express').Router();
 const Product = require('../db/models/Product');
 const Order = require('../db/models/Order');
 
+router.post('/search', async(req, res)=>{
+  const products = await Product.searchByPhrase(req.body.search);
+  const context = {
+    products: products,
+    admin: false,
+  }
+  if(res.app.locals.user){
+    if(res.app.locals.user.type === 'Admin') { context.admin = true;}
+  }
+  res.render('products', context);
+
+})
+
 router.get('/:id', async (req, res) => {
   const product = await Product.findByPk(req.params.id);
 

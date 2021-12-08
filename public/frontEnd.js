@@ -109,4 +109,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // const search = document.querySelector('#search')
+  // if(search){
+  //   search.addEventListener('input', (e)=>{
+  //     console.log(e.target.value)
+  //     console.log(title)
+  //     const template = `
+  //       <script id='productsTemplate' type='text/x-handlebars-template'>
+  //         {{#each products}}
+  //           <li class='productContainer'>
+  //             <a href='/products/{{id}}'>
+  //               <div class='productPictureContainer'>
+  //                 <img src='{{image}}' />
+  //               </div>
+  //               <p>{{title}}</p>
+  //             </a>
+  //             <div class='priceContainer'>
+  //               <button class='deleteButton' value='{{id}}'>Delete</button>
+  //               <p>{{price}}</p>
+  //             </div>
+  //           </li>
+  //         {{/each}}
+  //       </script>`
+  //   })
+  // }
+
 });
