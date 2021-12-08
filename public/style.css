@@ -73,3 +73,15 @@ footer {
   background-color: #efefef;
   border-top: 2px solid #ffbc65;
 }
+#userInfo{
+  display: none;
+}
+#userInfo:target{
+  display: block;
+}
+#editInfo{
+  display: none;
+}
+#editInfo:target{
+  display: block;
+}

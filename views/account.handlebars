@@ -1,0 +1,28 @@
+<div class='account'>
+  <h2>Hiii!,{{user.name}}</h2>
+  <p id='userInfo'>
+    Name: {{user.name}}
+    <br/>
+    Email: {{user.email}}
+    <br/>
+    Address: {{user.address || 'No address on file'}}
+    <a href='#'>Collapse</a>
+  </p>
+  <a href='#userInfo'>User Info</a>
+
+  <div id='editInfo'>
+    <form>
+      <label>Update Name</label> 
+      <input type='text' name='name' value={{user.name}}/>
+      <label> Update Email</label> 
+      <input type='email' name='email' value={{user.email}}/>
+      <label>Update Address</label> 
+      <input type='text' name='address' value={{user.address}}/>
+      <label>Update Phone</label> 
+      <input type='number' name='phone' value={{user.phone}}/>
+      <button id='updateUserInfoButton'>Update</button>
+    </form>
+    <a href='#'>Collapse</a>
+  </div>
+  <a href='#editInfo'
+</div>

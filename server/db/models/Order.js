@@ -6,9 +6,7 @@ class Order extends Model {
 }
 
 Order.init({
-// since assocaition are set up the user id will appear on this page
-// for strech goal could add things here
-
+  isPurchased: {type: DataTypes.INTEGER, defaultValue: 0},
 }, {
   sequelize: db,
 });

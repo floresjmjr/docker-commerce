@@ -109,10 +109,25 @@ router.get('/logout', async (req, res) => {
   res.redirect('/');
 });
 
+router.get('/account', async (req, res)=>{
+  res.render('account', {user: res.app.locals.user});
+});
+router.put('/account/update', signupChecks, async (req, res)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    // return res.status(400).json({errors: errors.array()});
+    const validationError = errors.array();
+
+    return res.render('account', {validationError});
+  }
+  const user = await User.findByPk(res.app.locals.user.id);
+  await user.update(req.body);
+  res.render('account');
+});
+
 // get logged in user(and will display account page)
 router.get('/:id', async (req, res) => {
   try {
-    console.log(req);
     // const user = await User.findAll();
     res.json(req);
   } catch (err) {
