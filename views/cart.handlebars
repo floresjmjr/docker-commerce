@@ -1,3 +1,4 @@
+<script src="https://js.stripe.com/v3/"></script>
 <div id="cart">
   <div id="list">
     {{#each cartItems}}
@@ -36,7 +37,9 @@
       <p id="total">$x.xx</p>
     </div>
     <div id="checkout">
-      <button>Checkout</button> <!-- Does nothing yet-->
+      <form action='/cart/create-checkout-session' method='POST'>
+        <button class='checkout'>Checkout</button> <!-- Does nothing yet-->
+        </form>
     </div>
     <div id="footer">
       <p>filler text that tells you about deals and warranty and promotes the store credit card. Also don't forget to have a total of $200 or more for free shipping</p>
