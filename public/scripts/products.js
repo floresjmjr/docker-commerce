@@ -1,5 +1,3 @@
-//This script loads on every page that is rendered because it is included in "main.handlbars" which is rendered at each page
-//This event handler waits until all the html code has been included in the DOM before performing any action
 document.addEventListener('DOMContentLoaded', () => {
   const Server = {
     // Make custom requests to the server (only PUT and DELETE really)
@@ -31,31 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Registers/Executes the event handlers and waits for events to occur
     registerHandlers: function () {
       // Admin Delete (All Products) Functionality
-      if (window.location.pathname === '/products') {
-        const delBtnNodes = document.querySelectorAll('.deleteButton');
-        for (el of delBtnNodes) {
-          Handler.deleteProduct(el);
-        }
-      }
-
-      // Admin Delete (Single Product) Functionlity
-      const delBtnNode = document.querySelector('#single-product-delete-button');
-      if (delBtnNode) {
-        Handler.deleteProduct(delBtnNode);
-      }
-
-      // cart remove item functionality
-      const remBtnNodes = document.querySelectorAll('.cartRemove');
-      if (remBtnNodes.length) {
-        for (el of remBtnNodes) {
-          Handler.removeItemFromCart(el);
-        }
-      }
-
-      // Admin Update Product Functionality
-      const updateButton = document.getElementById('updateProductButton');
-      if (updateButton) {
-        Handler.updateButton();
+      const delBtnNodes = document.querySelectorAll('.deleteButton');
+      for (el of delBtnNodes) {
+        Handler.deleteProduct(el);
       }
     },
 
@@ -80,50 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (error) {
         console.error(`Error message on the front-end: ${error}`);
       }
-    },
-
-    // Remove item from cart event handler function
-    removeItemFromCart: function (node) {
-      try {
-        node.addEventListener('click', async (e) => {
-          console.log('CLICK ME HEHE');
-          const path = `${window.location.href}/${e.target.value}`;
-          console.log(path);
-          const server = await Server.makeRequest('DELETE', path);
-          console.log('response1', server.status);
-          if (server.status === 200) {
-            console.log('status 200 in event');
-
-            const productNode = e.target.parentNode.parentNode.parentNode.parentNode;
-            productNode.remove();
-          }
-        });
-      } catch (error) {
-        console.error(`Error message on the front-end: ${error}`);
-      }
-    },
-
-    // Update the product event handler function
-    updateProduct: function () {
-      updateButton.addEventListener('click', async () => {
-        try {
-          const path = window.location.href;
-          const inputNodes = document.querySelectorAll('#productForm input');
-          const inputArray = Array.prototype.slice.call(inputNodes);
-          const data = {};
-          for (el of inputArray) {
-            data[el.name] = el.value;
-          }
-          data['description'] = document.querySelector('textarea').textContent.trim();
-          const serverRequest = await Server.makeRequest('PUT', path, data);
-          const parsedData = JSON.parse(serverRequest.response);
-          if (parsedData.id) {
-            window.location.assign(`http://localhost:3000/products/${parsedData.id}`);
-          }
-        } catch (error) {
-          console.error(`Error message on the front-end: ${error}`);
-        }
-      });
     },
   };
 
