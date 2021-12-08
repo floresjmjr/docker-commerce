@@ -1,14 +1,5 @@
-<script>
-  alert('Test: If you see this, the JS test worked!');
-
-
-</script>
-
-
-
-
 <div id="login">
-  <form action="/user/login" method="POST">
+  <form {{!-- action="/user/login"--}} {{!--method="POST"--}}>
     <h1>Login</h1>
     <div class="row mb-3">
       <label for="email" class="col-sm-2 col-form-label">Email</label>
@@ -32,6 +23,56 @@
         </div>
       </div>
     </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <button type="submit" id="submitBtn" class="btn btn-primary">Sign in</button>
   </form>
 </div>
+
+
+
+
+
+
+
+
+
+<script>
+  const form = document.getElementsByTagName("form");
+
+
+
+
+  console.log("btn: ", form)
+
+  const getUser = async (e) => {
+    e.preventDefault();
+    
+    console.log('triggered')
+
+    const email = document.getElementsByName("email")[0].value;
+    const password = document.getElementsByName("password")[0].value;
+
+
+    const data = {email, password};
+
+    console.log("data: ", data)
+    try{
+      const user = await fetch('/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }) 
+
+      console.log("response from server: ", user);
+
+    } catch (err) {
+      console.error(err)
+    }
+
+    
+  }
+
+
+    form.onsubmit = getUser;
+</script>

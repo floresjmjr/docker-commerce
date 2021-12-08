@@ -69,6 +69,8 @@ router.get('/login', async (req, res) => {
 
 // verify user exist, and return user data if they do
 router.post('/login', async (req, res) => {
+
+  console.log("body recieved: ", req.body);
   try {
     // check user by email
     const [user] = await User.findAll({
