@@ -1,18 +1,52 @@
 const router = require('express').Router();
 const Product = require('../db/models/Product');
 const Order = require('../db/models/Order');
+const { isAdmin } = require('./_functions')
+
 
 router.post('/search', async(req, res)=>{
   const products = await Product.searchByPhrase(req.body.search);
   const context = {
     products: products,
-    admin: false,
-  }
-  if(res.app.locals.user){
-    if(res.app.locals.user.type === 'Admin') { context.admin = true;}
+    admin: isAdmin(res.app.locals.user),
   }
   res.render('products', context);
+})
 
+router.get("/Men's", async(req, res)=>{
+  const products = await Product.findAll({where: {category: "men's clothing"}});
+  const context = {
+    products: products,
+    admin: isAdmin(res.app.locals.user),
+  }
+  res.render('products', context);
+})
+
+router.get("/Women's", async(req, res)=>{
+  const products = await Product.findAll({where: {category: "women's clothing"}});
+  const context = {
+    products: products,
+    admin: isAdmin(res.app.locals.user),
+  }
+  res.render('products', context);
+})
+
+router.get("/Jewelery", async(req, res)=>{
+  const products = await Product.findAll({where: {category: "jewelery"}});
+  const context = {
+    products: products,
+    admin: isAdmin(res.app.locals.user),
+  }
+  res.render('products', context);
+})
+
+router.get("/Electronics", async(req, res)=>{
+  const products = await Product.findAll({where: {category: "electronics"}});
+  const context = {
+    products: products,
+    admin: isAdmin(res.app.locals.user),
+  }
+  res.render('products', context);
 })
 
 router.get('/:id', async (req, res) => {
