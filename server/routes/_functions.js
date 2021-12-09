@@ -31,7 +31,6 @@ function formatJewelry(description) {
 
 function formatWomensClothing(description) {
   let splitDesc = description.split(', ');
-  console.log('splitDesc', splitDesc)
   // const arrDesc = [];
   // for (idx in splitDesc) {
   //   if (splitDesc[idx + 1]) {
@@ -77,8 +76,6 @@ function formatSingleProduct(product) {
   //Title and Category were formated in the seed.js file
   product.price = formatPrice(product.price);
   product.description = formatDescription(product.description, product.category);
-  console.log(product.description);
-  console.log(Array.isArray(product.description));
   return product;
 }
 
