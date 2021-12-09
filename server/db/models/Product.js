@@ -62,7 +62,7 @@ class Product extends Model {
 
 Product.init({
   title: DataTypes.STRING,
-  price: DataTypes.INTEGER,
+  price: DataTypes.REAL,
   description: DataTypes.STRING,
   category: DataTypes.STRING,
   image: DataTypes.STRING,
