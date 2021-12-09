@@ -1,0 +1,44 @@
+#editInfo form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#editInfo input {
+    box-shadow: 5px 3px #b0b0b0;
+}
+
+#editInfo button {
+    width: 25%;
+}
+
+section#historyProduct {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 10px;
+}
+
+@media only screen and (min-width: 800px) {
+    img#historyProductImage {
+        height: 250px;
+        width: 250px;
+    }
+}
+
+@media only screen and (max-width: 799px) {
+    img#historyProductImage {
+        height: 50%;
+        width: 50%;
+    }
+}
+
+section#historyProductText {
+    display: flex;
+    flex-direction: column;
+}
+
+p#historyProductTitle {
+    font-size: 20px;
+    font-weight: 700;
+}
