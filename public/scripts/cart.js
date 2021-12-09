@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Make custom requests to the server (only PUT and DELETE really)
     // Alternatively you can use the "fetch" API
     makeRequest: function(method, url, data = '') {
-     
       const request = new XMLHttpRequest();
       request.open(method, url);
       request.setRequestHeader('Content-type', 'application/json');
@@ -40,15 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
     removeItemFromCart: function(node) {
       try {
         node.addEventListener('click', async (e) => {
-         
           const path = `${window.location.href}/${e.target.value}`;
-         
-       
-          const server = await Server.makeRequest('DELETE', path);
-         ;
-          if (server.status === 200) {
-           
 
+
+          const server = await Server.makeRequest('DELETE', path);
+
+          if (server.status === 200) {
             const productNode = e.target.parentNode.parentNode.parentNode.parentNode;
             productNode.remove();
           }
