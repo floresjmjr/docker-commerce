@@ -5,14 +5,16 @@ const PORT = 3000;
 const Handlebars = require('handlebars');
 const {create} = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const {select} = require('./routes/_functions.js')
 
-const hbs = create({handlebars: allowInsecurePrototypeAccess(Handlebars)});
-
-app.engine('handlebars', hbs.engine);
-Handlebars.registerHelper('isdefined', function(value) {
-  return typeof value != 'undefined';
+const hbs = create({
+  handlebars: allowInsecurePrototypeAccess(Handlebars),
+  helpers: { 
+    select: select,
+    }
 });
 
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 

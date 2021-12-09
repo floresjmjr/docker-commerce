@@ -28,6 +28,7 @@ router.get('/admin/newProduct', (req, res, next) => {
 
 // Admin creates a new product for sale
 router.post('/admin/newProduct', productChecks, async (req, res, next) => {
+  console.log('add product', req.body)
   try {
     if (isAdmin(res.app.locals.user)) {
       const errors = validationResult(req);
