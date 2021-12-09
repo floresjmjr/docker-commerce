@@ -57,7 +57,7 @@ router.post('/signup', signupChecks, async (req, res)=>{
 
   // auto login
   res.app.locals.user = newUser;
-  console.log('Newwww\'s', newUser);
+
   res.redirect(`/`);
 });
 
@@ -114,20 +114,14 @@ router.get('/account', async (req, res)=>{
     userId: res.app.locals.user.id,
     isPurchased: 1,
   }, include: Product});
-  console.log('HERE', recentPurchases);
+
   res.render('account', {user: res.app.locals.user, orderHistory: recentPurchases});
 });
-router.put('/account/update', signupChecks, async (req, res)=>{
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    // return res.status(400).json({errors: errors.array()});
-    const validationError = errors.array();
-
-    return res.render('account', {validationError});
-  }
+router.post('/account/update', async (req, res)=>{
   const user = await User.findByPk(res.app.locals.user.id);
-  await user.update(req.body);
-  res.render('account');
+  res.app.locals.user = await user.update(req.body);
+
+  res.redirect(301, '/user/account');
 });
 
 // get logged in user(and will display account page)

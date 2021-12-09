@@ -11,7 +11,7 @@
   
 <p>update info is here</p>
   <div id='editInfo'>
-    <form>
+    <form action='/user/account/update' method="POST">
       <label>Update Name</label> 
       <input type='text' name='name' value='{{user.name}}'/>
       <label> Update Email</label> 
@@ -20,7 +20,7 @@
       <input type='text' name='address' value='{{user.address}}'/>
       <label>Update Phone</label> 
       <input type='number' name='phone' value='{{user.phone}}'/>
-      <button id='updateUserInfoButton'>Update</button>
+      <button type='submit' id='updateUserInfoButton'>Update</button>
     </form>
    
   </div>

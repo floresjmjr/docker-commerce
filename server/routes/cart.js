@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 });
 
 router.delete('/:productId', async (req, res)=>{
-  console.log('ROUTE HIT');
+ 
   const itemToRemove = await Product.findByPk(req.params.productId);
 
   const cart = await Order.findOne({
@@ -34,9 +34,9 @@ router.delete('/:productId', async (req, res)=>{
       isPurchased: 0,
     },
   });
-  console.log('REMOVE!', itemToRemove);
+  
   const deleted = await cart.removeProduct(itemToRemove);
-  console.log('DEEELETE', deleted);
+  
 
   await cart.reload();
   res.sendStatus(200);

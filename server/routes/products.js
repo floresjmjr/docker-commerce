@@ -97,7 +97,7 @@ router.post('/:id', async (req, res)=>{
   }
 
   cart = await cart.getProducts();
-  console.log('redering car page');
+
   res.redirect(301, '/cart');
 });
 module.exports = router;

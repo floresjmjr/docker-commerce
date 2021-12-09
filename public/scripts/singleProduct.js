@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         node.addEventListener('click', async (e) => {
           const path = `${window.location.href}/${e.target.value}`;
-          console.log(path);
+          
           const server = await Server.makeRequest('DELETE', path);
-          console.log('response1', server.status);
+          
           if (server.status === 200) {
-            console.log('status 200 in event');
+            
             if (window.location.pathname === '/products') {
               const productNode = e.target.parentNode.parentNode;
               productNode.remove();
