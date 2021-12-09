@@ -96,10 +96,11 @@ router.post('/login', async (req, res) => {
 
     res.app.locals.user = user;
 
+    res.json(user);
 
     // ! This is a place holder for MVP.
     // ! This should return a json of the user to be stored locally
-    res.redirect(`/`);
+    // res.redirect(`/`);
   } catch (err) {
     console.error(err);
   }
