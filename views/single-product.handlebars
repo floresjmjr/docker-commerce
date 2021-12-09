@@ -9,7 +9,13 @@
                 {{/if}}
             </div>
             <div class="single-product-category">{{category}}</div>
-            <div class="single-product-description">{{description}}</div>
+            <div class="single-product-description">
+              <ul>
+              {{#each description}}
+              <li>{{this}}</li>
+              {{/each}}
+              </ul>
+            </div>
             <div class="single-product-price">${{price}}</div>
             <form action='/products/{{id}}' method='POST' class="single-product-cart-form">
                 <button type='submit' class="single-product-cart-cta">Add to Cart</button>

@@ -1,12 +1,11 @@
 const {db} = require('./server/db/db');
 const fs = require('fs').promises;
 const path = require('path');
-const {Product, User, Order}= require('./server/db');
-
+const {Product, User, Order} = require('./server/db');
 
 // dont have User or order info to seed
 
-const seedProduct = async ()=>{
+const seedProduct = async () => {
   // find the path to our json file
   const seedPath = path.join(__dirname, 'seeds/products.json');
 
@@ -24,24 +23,19 @@ const seedProduct = async ()=>{
   }
 
   // will create each row for our Product Table
-  const productPromises = products.map((product) => 
-  {
-    product.category = capitalize(product.category)
-    if(!(product.category === 'Electronics')){
-      product.title = capitalize(product.title)
+  const productPromises = products.map((product) => {
+    product.category = capitalize(product.category);
+    if (!(product.category === 'Electronics')) {
+      product.title = capitalize(product.title);
     }
-    console.log('category')
-    product.price = Number(product.price.toFixed(2))
-    console.log(product)
-    return Product.create(product)
+    return Product.create(product);
   });
 
   await Promise.all(productPromises);
   console.log('product data has been successfully populated into our table');
 };
 
-
-const seedUser = async ()=>{
+const seedUser = async () => {
   // find the path to our json file
   const seedPath = path.join(__dirname, 'seeds/users.json');
 
@@ -72,7 +66,7 @@ const seedUserOrders = async () => {
 };
 
 // Fills carts with products
-const seedCart = async () =>{
+const seedCart = async () => {
   // find the path to our json file
   const seedPath = path.join(__dirname, 'seeds/orderProduct.json');
 
@@ -95,7 +89,6 @@ const seedCart = async () =>{
   console.log('Products have successfully been added to Orders');
 };
 
-
 const seed = async () => {
   console.log('seeding Database...');
   await db.sync({force: true});
@@ -110,7 +103,4 @@ const seed = async () => {
 // export the seed function
 // Why?
 
-
 seed();
-
-
