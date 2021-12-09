@@ -39,12 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         node.addEventListener('click', async (e) => {
           const path = `${window.location.href}`;
 
-          console.log("path to delete: ", path);
-
           const server = await Server.makeRequest('DELETE', path);
 
           if (server.status === 200) {
-            alert("Product was deleted!");
+            alert('Product was deleted!');
             if (window.location.pathname === '/products') {
               const productNode = e.target.parentNode.parentNode;
               productNode.remove();
