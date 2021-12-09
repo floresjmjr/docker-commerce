@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const Server = {
     // Make custom requests to the server (only PUT and DELETE really)
     // Alternatively you can use the "fetch" API
-    makeRequest: function (method, url, data = '') {
+    makeRequest: function(method, url, data = '') {
       const request = new XMLHttpRequest();
       request.open(method, url);
       request.setRequestHeader('Content-type', 'application/json');
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const Handler = {
-    //Executes the relevant handlers based on whether the querySelector can find the id, if not then no related handler is executed
+    // Executes the relevant handlers based on whether the querySelector can find the id, if not then no related handler is executed
     // Registers/Executes the event handlers and waits for events to occur
-    registerHandlers: function () {
+    registerHandlers: function() {
       // cart remove item functionality
       const remBtnNodes = document.querySelectorAll('.cartRemove');
       for (el of remBtnNodes) {
@@ -36,17 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     // Remove item from cart event handler function
-    removeItemFromCart: function (node) {
+    removeItemFromCart: function(node) {
       try {
         node.addEventListener('click', async (e) => {
-          console.log('CLICK ME HEHE');
           const path = `${window.location.href}/${e.target.value}`;
-          console.log(path);
-          const server = await Server.makeRequest('DELETE', path);
-          console.log('response1', server.status);
-          if (server.status === 200) {
-            console.log('status 200 in event');
 
+
+          const server = await Server.makeRequest('DELETE', path);
+
+          if (server.status === 200) {
             const productNode = e.target.parentNode.parentNode.parentNode.parentNode;
             productNode.remove();
           }

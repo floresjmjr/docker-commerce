@@ -8,29 +8,36 @@ router.get('/', async (req, res) => {
     res.redirect('/user/login');
   }
 
-
   let cartItems = await Order.findOne({
     where: {
       userId: res.app.locals.user.id,
+      isPurchased: 0,
     },
     include: {
       model: Product,
     },
   });
-  cartItems = await cartItems.getProducts();
+  if (cartItems) {
+    cartItems = await cartItems.getProducts();
+  }
+
   res.render('cart', {cartItems});
 });
 
 router.delete('/:productId', async (req, res)=>{
+ 
   const itemToRemove = await Product.findByPk(req.params.productId);
 
   const cart = await Order.findOne({
     where: {
       userId: res.app.locals.user.id,
+      isPurchased: 0,
     },
   });
+  
+  const deleted = await cart.removeProduct(itemToRemove);
+  
 
-  await cart.removeProduct(itemToRemove);
   await cart.reload();
   res.sendStatus(200);
 });

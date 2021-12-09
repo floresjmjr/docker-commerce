@@ -1,6 +1,7 @@
 [
     {
-        "UserId" : 1
+        "UserId" : 1,
+        "isPurchased":1
     },
     {
         "UserId" : 2
