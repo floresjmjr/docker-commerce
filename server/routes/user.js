@@ -57,7 +57,7 @@ router.post('/signup', signupChecks, async (req, res)=>{
 
   // auto login
   res.app.locals.user = newUser;
-
+  console.log('Newwww\'s', newUser);
   res.redirect(`/`);
 });
 
@@ -110,7 +110,12 @@ router.get('/logout', async (req, res) => {
 });
 
 router.get('/account', async (req, res)=>{
-  res.render('account', {user: res.app.locals.user});
+  const recentPurchases = await Order.findAll({where: {
+    userId: res.app.locals.user.id,
+    isPurchased: 1,
+  }, include: Product});
+  console.log('HERE', recentPurchases);
+  res.render('account', {user: res.app.locals.user, orderHistory: recentPurchases});
 });
 router.put('/account/update', signupChecks, async (req, res)=>{
   const errors = validationResult(req);

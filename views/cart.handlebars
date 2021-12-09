@@ -1,3 +1,4 @@
+{{#if cartItems}}
 <div id="cart">
   <div id="list">
     {{#each cartItems}}
@@ -48,5 +49,11 @@
       </div>
     </div>
   </div>
+  <script src="/scripts/cart.js"></script>
 </div>
+{{else}}
+<h3>Looks like you have no items in yout cart</h3>
+<a href='/products'>Start shopping</a>
+{{/if}}
 <!-- TODO: Make sure to querry cart with products from user -->
+
