@@ -45,8 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const server = await Server.makeRequest('DELETE', path);
 
           if (server.status === 200) {
-            const productNode = e.target.parentNode.parentNode.parentNode.parentNode;
-            productNode.remove();
+            // const productNode = e.target.parentNode.parentNode.parentNode.parentNode;
+            // productNode.remove();
+            window.location.reload();
           }
         });
       } catch (error) {
@@ -57,3 +58,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Handler.registerHandlers();
 });
+
+const HTMLTags = document.getElementsByClassName('total');
+const totalTags = Array.prototype.slice.call( HTMLTags );
+
+const HTMLItemsTotal = document.getElementById('count');
+
+const generateTotal = () => {
+
+
+  const HTML = document.getElementsByClassName('cost-value');
+
+  const HTMLArr = Array.prototype.slice.call( HTML );
+
+
+  console.log('prices: ', HTMLArr);
+
+  let count = 0;
+
+  const prices = HTMLArr.map((price) => {
+    count ++;
+    const num = price.innerHTML.replace('$', '');
+    console.log(num);
+    return parseFloat(num);
+  });
+
+  console.log('prices: ', prices);
+
+  const total = prices.reduce((last, curr) => last + curr );
+
+  console.log('total: ', total);
+
+  console.log('totalTags: ', HTMLTags);
+
+  totalTags.forEach((tag) => {
+    tag.innerHTML = `$${total}`;
+  });
+
+  HTMLItemsTotal.innerHTML = `${count} Items`;
+};
+
+generateTotal();

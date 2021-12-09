@@ -11,7 +11,7 @@
           <img src="{{image}}"/>
         </div>
         <div id="details">
-          <h3 id="title">{{title}}</h3>
+          <h5 id="title">{{title}}</h5>
           <div id="sub-title">
             <p id="category">{{category}}</p>
           </div>
@@ -28,25 +28,23 @@
     {{/each}}
     <div id="sub-total">
       <p id="count">x Items</p> <!-- Does nothing yet-->
-      <p id="total">total: $x.xx</p> <!-- Does nothing yet-->
+      <p class="total">total: $x.xx</p> <!-- Does nothing yet-->
     </div>
   </div>
   <div id="receipt-view">
     <div id="overview">
       <!-- we will want to do some js magic here-->
       {{#each cartItems}}
-        <p id="cost-value">${{price}}</p>
+        <p class="cost-value">${{price}}</p>
       {{/each}}
       <!-- some kind of divide -->
-      <p id="total">$x.xx</p>
+      <p class="total">$x.xx</p>
     </div>
-
     <div id="checkout">
       <form action='/cart/create-checkout-session' method='POST'>
         <button class='checkout'>Checkout</button> <!-- Does nothing yet-->
         </form>
     </div>
-
     <div id="footer">
       <p>filler text that tells you about deals and warranty and promotes the store credit card. Also don't forget to have a total of $200 or more for free shipping</p>
       <div class="checkbox">
