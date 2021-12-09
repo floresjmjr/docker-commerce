@@ -86,6 +86,7 @@ router.post('/create-checkout-session', async (req, res)=>{
         quantity: 1,
       };
     }),
+    allow_promotion_codes: true,
     success_url: `${DOMAIN}/cart/success`,
     cancel_url: `${DOMAIN}/cart/cancel`,
   });
