@@ -1,0 +1,6 @@
+@media only screen and (max-width: 799px) {
+    #signup-section {
+        display: flex;
+        flex-direction: column;
+    }
+}

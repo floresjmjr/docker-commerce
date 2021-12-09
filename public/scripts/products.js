@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const Server = {
     // Make custom requests to the server (only PUT and DELETE really)
     // Alternatively you can use the "fetch" API
-    makeRequest: function (method, url, data = '') {
+    makeRequest: function(method, url, data = '') {
       const request = new XMLHttpRequest();
       request.open(method, url);
       request.setRequestHeader('Content-type', 'application/json');
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const Handler = {
-    //Executes the relevant handlers based on whether the querySelector can find the id, if not then no related handler is executed
+    // Executes the relevant handlers based on whether the querySelector can find the id, if not then no related handler is executed
     // Registers/Executes the event handlers and waits for events to occur
-    registerHandlers: function () {
+    registerHandlers: function() {
       // Admin Delete (All Products) Functionality
       const delBtnNodes = document.querySelectorAll('.deleteButton');
       for (el of delBtnNodes) {
@@ -36,15 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     // Delete product event handler function
-    deleteProduct: function (node) {
+    deleteProduct: function(node) {
       try {
         node.addEventListener('click', async (e) => {
           const path = `${window.location.href}/${e.target.value}`;
-          console.log(path);
+
           const server = await Server.makeRequest('DELETE', path);
-          console.log('response1', server.status);
+
           if (server.status === 200) {
-            console.log('status 200 in event');
             if (window.location.pathname === '/products') {
               const productNode = e.target.parentNode.parentNode;
               productNode.remove();
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Handler.registerHandlers();
 
-  //To make a handler for search so that it searches while they type
+  // To make a handler for search so that it searches while they type
   // const search = document.querySelector('#search')
   // if(search){
   //   search.addEventListener('input', (e)=>{

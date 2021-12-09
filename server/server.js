@@ -6,7 +6,6 @@ const Handlebars = require('handlebars');
 const {create} = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 
-
 const hbs = create({handlebars: allowInsecurePrototypeAccess(Handlebars)});
 
 app.engine('handlebars', hbs.engine);
@@ -20,6 +19,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
 
 
 app.use('/', require('./routes'));
