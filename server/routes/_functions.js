@@ -5,6 +5,19 @@ function isAdmin(user) {
   return false;
 }
 
+function select( value, options ){
+  const selectElements = ["Men's Clothing", "Women's Clothing", "Jewelery", "Electronics"  ]
+  let htmlString = ''
+  const selectOptions = selectElements.map((category)=>{
+    if (value === category) {
+      return `<option value="${category}" selected>${category}</option>`
+    } else {
+      return `<option value="${category}">${category}</option>`
+    }
+  }) 
+  return selectOptions.join('\r\n')
+}
+
 function lowercaseWords(sentence) {}
 
 function capitalizeSentences(description, delimiter) {
@@ -80,4 +93,4 @@ function formatSingleProduct(product) {
   return product;
 }
 
-module.exports = {isAdmin, formatSingleProduct, formatAllProducts};
+module.exports = {isAdmin, formatSingleProduct, formatAllProducts, select};
