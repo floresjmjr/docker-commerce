@@ -2,23 +2,23 @@
   #productFormSection {
     display: flex;
     flex-direction: column;
-    padding-left: 60%;
+    padding-left: 50%;
   }
 
-  #productForm {
-    display: flex;
-    flex-direction: column;
+  #productFormSection h2 {
+    padding-left: 30px;
   }
 
-  #formElements {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
+  #imagePreview img {
+    max-height: 250px;
+    max-width: 250px;
+    background-color: #b0b0b0;
   }
 
-  /* .addProductFormElement {
+  #productForm ul {
+    list-style-type: none;
     width: 60%;
-  } */
+  }
 }
 
 @media only screen and (min-width: 800px) {
@@ -32,31 +32,16 @@
     flex-direction: row;
     justify-content: space-between;
   }
-  
+
   #productForm ul {
     list-style-type: none;
     width: 48%;
   }
-  
+
   #productForm label {
     padding-right: 15px;
   }
-  
-  #productForm input {
-    border: 1px solid black;
-    box-shadow: 5px 3px #b0b0b0;
-  }
-  
-  #productForm textarea {
-    box-shadow: 5px 3px #b0b0b0;
-  }
-  
-  #productForm li {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 10px;
-  }
-  
+
   #relatedToForm{
     display: flex;
     flex-direction: column;
@@ -78,4 +63,19 @@
     padding-left: 40px;
     padding-right: 40px;
   }
+}
+
+#productForm input {
+  border: 1px solid black;
+  box-shadow: 5px 3px #b0b0b0;
+}
+
+#productForm textarea {
+  box-shadow: 5px 3px #b0b0b0;
+}
+
+#productForm li {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
 }
