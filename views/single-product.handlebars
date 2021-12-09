@@ -17,14 +17,19 @@
               </ul>
             </div>
             <div class="single-product-price">${{price}}</div>
-            <form action='/products/{{id}}' method='POST' class="single-product-cart-form">
-                <button type='submit' class="single-product-cart-cta">Add to Cart</button>
-            </form>
-            
+{{/with}}
+            {{#if user}}
+                <form action='/products/{{id}}' method='POST' class="single-product-cart-form">
+                    <button type='submit' class="single-product-cart-cta">Add to Cart</button>
+                </form>
+            {{else}}
+                <form action='/user/login' method='GET' class="single-product-cart-form">
+                    <button type='submit' class="single-product-cart-cta">Login to Add to Cart</button>
+                </form>
+            {{/if}}
             {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
                 <a href="/">Delete Product</a>
             </div> --}}
         </div>
     </section>
-{{/with}}
 <script src="/scripts/singleProduct.js"></script>

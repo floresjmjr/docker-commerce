@@ -60,6 +60,7 @@ router.get('/:id', async (req, res) => {
 
   const context = {
     product: formatSingleProduct(product),
+    user: res.app.locals.user,
     admin: isAdmin(res.app.locals.user),
   };
   res.render('single-product', context);
