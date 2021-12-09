@@ -37,7 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteProduct: function(node) {
       try {
         node.addEventListener('click', async (e) => {
-          const path = `${window.location.href}/${e.target.value}`;
+          const path = `${window.location.href}`;
+
+          console.log("path to delete: ", path);
 
           const server = await Server.makeRequest('DELETE', path);
 
