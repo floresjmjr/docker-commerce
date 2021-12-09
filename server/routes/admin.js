@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const {check, validationResult} = require('express-validator');
 const {Product} = require('../db/index');
+const { isAdmin } = require('./_functions')
 
 //Server-side validation checks for the product through the req.body
 const productChecks = [
@@ -11,17 +12,10 @@ const productChecks = [
   check('image').notEmpty().isURL(),
 ];
 
-function checkIfAdmin(user) {
-  if (user) {
-    return user.type === 'Admin';
-  }
-  return false;
-}
-
 //Admin views the page to create a new product
 router.get('/admin/newProduct', (req, res, next) => {
   try {
-    if (checkIfAdmin(res.app.locals.user)) {
+    if (isAdmin(res.app.locals.user)) {
       res.render('addProduct');
     } else {
       //Need a unauthorized page
@@ -35,7 +29,7 @@ router.get('/admin/newProduct', (req, res, next) => {
 //Admin creates a new product for sale
 router.post('/admin/newProduct', productChecks, async (req, res, next) => {
   try {
-    if (checkIfAdmin(res.app.locals.user)) {
+    if (isAdmin(res.app.locals.user)) {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(404).json({errors: errors.array()});
@@ -54,7 +48,7 @@ router.post('/admin/newProduct', productChecks, async (req, res, next) => {
 // Admin updates the product information
 router.put('/products/:productId/update', productChecks, async (req, res, next) => {
   try {
-    if (checkIfAdmin(res.app.locals.user)) {
+    if (isAdmin(res.app.locals.user)) {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(404).json({errors: errors.array()});
@@ -74,7 +68,7 @@ router.put('/products/:productId/update', productChecks, async (req, res, next) 
 //Admin views the page to update a product
 router.get('/products/:productId/update', async (req, res, next) => {
   try {
-    if (checkIfAdmin(res.app.locals.user)) {
+    if (isAdmin(res.app.locals.user)) {
       const product = await Product.findByPk(req.params.productId);
       res.render('updateProduct', {product: product});
     } else {
@@ -89,7 +83,7 @@ router.get('/products/:productId/update', async (req, res, next) => {
 //Admin deletes a product from sale
 router.delete('/products/:productId', async (req, res, next) => {
   try {
-    if (checkIfAdmin(res.app.locals.user)) {
+    if (isAdmin(res.app.locals.user)) {
       await Product.destroy({where: {id: req.params.productId}});
       res.sendStatus(200);
     } else {

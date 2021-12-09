@@ -1,7 +1,24 @@
 # E-Commerce-App
+A simplistic e-commerce app where you can browse items by category and have a seemless check out experience
 
+## Installation
+```npm install```
 
+## Usage
+```npm run seed```
+you can use ```npm run dev``` with nodemon to start the server
+or ```npm run start```
 
+## Run tests
+```npm run test```
+
+## Features
+- use a search bar to filter through items
+- shop by specific category
+- sort items by price
+- view past order history
+- checkout with stripe or Google pay
+- admin capabilites to add remove and update items in inventory
 ## Design Documents
 ---
 ### ***UI Wireframes***

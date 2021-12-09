@@ -109,10 +109,24 @@ router.get('/logout', async (req, res) => {
   res.redirect('/');
 });
 
+router.get('/account', async (req, res)=>{
+  const recentPurchases = await Order.findAll({where: {
+    userId: res.app.locals.user.id,
+    isPurchased: 1,
+  }, include: Product});
+
+  res.render('account', {user: res.app.locals.user, orderHistory: recentPurchases});
+});
+router.post('/account/update', async (req, res)=>{
+  const user = await User.findByPk(res.app.locals.user.id);
+  res.app.locals.user = await user.update(req.body);
+
+  res.redirect(301, '/user/account');
+});
+
 // get logged in user(and will display account page)
 router.get('/:id', async (req, res) => {
   try {
-    console.log(req);
     // const user = await User.findAll();
     res.json(req);
   } catch (err) {

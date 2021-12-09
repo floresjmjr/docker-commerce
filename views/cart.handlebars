@@ -1,4 +1,8 @@
+
 <script src="https://js.stripe.com/v3/"></script>
+
+{{#if cartItems}}
+
 <div id="cart">
   <div id="list">
     {{#each cartItems}}
@@ -36,18 +40,30 @@
       <!-- some kind of divide -->
       <p id="total">$x.xx</p>
     </div>
+
     <div id="checkout">
       <form action='/cart/create-checkout-session' method='POST'>
         <button class='checkout'>Checkout</button> <!-- Does nothing yet-->
         </form>
     </div>
+
     <div id="footer">
       <p>filler text that tells you about deals and warranty and promotes the store credit card. Also don't forget to have a total of $200 or more for free shipping</p>
-      <input type="checkbox" name="check-one"/>
-      <label for="check-one"> Sign-up for our newsletter for weekly deals just for you! </label>
-      <input type="checkbox" name="check-two"/>
-      <label for="check-two"> Get first-class shipping for $24.00 more! </label>
+      <div class="checkbox">
+        <input type="checkbox" name="check-one"/>
+        <label for="check-one"> Sign-up for our newsletter for weekly deals just for you! </label>
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" name="check-two"/>
+        <label for="check-two"> Get first-class shipping for $24.00 more! </label>
+      </div>
     </div>
   </div>
+  <script src="/scripts/cart.js"></script>
 </div>
+{{else}}
+<h3>Looks like you have no items in yout cart</h3>
+<a href='/products'>Start shopping</a>
+{{/if}}
 <!-- TODO: Make sure to querry cart with products from user -->
+

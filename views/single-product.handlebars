@@ -1,21 +1,30 @@
-<section class="single-product-container">
-    <img class="single-product-image" src={{product.image}} alt={{product.title}} />
-    <div class="single-product-text-container">
-        <div class="single-product-title">
-            {{product.title}}
-            {{#if admin}}
-              <span class="single-product-admin-button"><a href="/products/{{product.id}}/update">Edit Product</a></span>
-            {{/if}}
+{{#with product}}
+    <section class="single-product-container">
+        <img class="single-product-image" src={{image}} alt={{title}} />
+        <div class="single-product-text-container">
+            <div class="single-product-title">
+                {{title}}
+                {{#if admin}}
+                <span class="single-product-admin-button"><a href="/products/{{id}}/update">Edit Product</a></span>
+                {{/if}}
+            </div>
+            <div class="single-product-category">{{category}}</div>
+            <div class="single-product-description">
+              <ul>
+              {{#each description}}
+              <li>{{this}}</li>
+              {{/each}}
+              </ul>
+            </div>
+            <div class="single-product-price">${{price}}</div>
+            <form action='/products/{{id}}' method='POST' class="single-product-cart-form">
+                <button type='submit' class="single-product-cart-cta">Add to Cart</button>
+            </form>
+            
+            {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
+                <a href="/">Delete Product</a>
+            </div> --}}
         </div>
-        <div class="single-product-category">{{product.category}}</div>
-        <div class="single-product-description">{{product.description}}</div>
-        <div class="single-product-price">${{product.price}}</div>
-        <form action='/products/{{product.id}}' method='POST'>
-            <button  type='submit' class="single-product-cart-cta">Add to Cart</button>
-        </form>
-        
-        {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
-            <a href="/">Delete Product</a>
-        </div> --}}
-    </div>
-</section>
+    </section>
+{{/with}}
+<script src="/scripts/singleProduct.js"></script>
