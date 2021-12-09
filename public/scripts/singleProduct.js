@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Registers/Executes the event handlers and waits for events to occur
     registerHandlers: function() {
       // Admin Delete (Single Product) Functionlity
-      const delBtnNode = document.querySelector('#single-product-delete-button');
+      const delBtnNode = document.querySelector('.single-product-delete-button');
       Handler.deleteProduct(delBtnNode);
     },
 

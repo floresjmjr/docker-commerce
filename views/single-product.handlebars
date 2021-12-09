@@ -27,9 +27,11 @@
                     <button type='submit' class="single-product-cart-cta">Login to Add to Cart</button>
                 </form>
             {{/if}}
-            {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
-                <a href="/">Delete Product</a>
-            </div> --}}
+            {{#if admin}}
+                <div class="single-product-admin-button" id="single-product-delete-button">
+                    <button class='single-product-delete-button' value='{{product.id}}'>Delete</button>
+                </div>
+            {{/if}}
         </div>
     </section>
 <script src="/scripts/singleProduct.js"></script>
