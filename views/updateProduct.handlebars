@@ -13,7 +13,10 @@
         </li>
         <li>
           <label for='category'>Category</label>
-          <input type='text' id='category' name='category' value='{{category}}' required />
+          <select id='category' name='category' class="addProductFormElement" required>
+            {{#select category}}
+            {{/select}}
+          </select>
         </li>
         <li>
           <label for='image'>Image</label>
