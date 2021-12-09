@@ -15,10 +15,10 @@
               {{/each}}
               </ul>
             </div>
-            <div class="single-product-price">${{price}}</div>
-{{/with}}
+            <div class="single-product-price">${{product.price}}</div>
+
             {{#if user}}
-                <form action='/products/{{id}}' method='POST' class="single-product-cart-form">
+                <form action='/products/{{product.id}}' method='POST' class="single-product-cart-form">
                     <button type='submit' class="single-product-cart-cta">Add to Cart</button>
                 </form>
             {{else}}

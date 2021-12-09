@@ -30,7 +30,7 @@ function formatJewelry(description) {
 }
 
 function formatWomensClothing(description) {
-  let splitDesc = description.split(', ');
+  const splitDesc = description.split(', ');
   // const arrDesc = [];
   // for (idx in splitDesc) {
   //   if (splitDesc[idx + 1]) {
@@ -47,14 +47,14 @@ function formatWomensClothing(description) {
   });
 }
 
-//Needs to be refactored using switch
+// Needs to be refactored using switch
 function formatDescription(description, category) {
-  if (category === "Women's Clothing") {
+  if (category === 'Women\'s Clothing') {
     // return Array.of(description)
     return formatWomensClothing(description);
   } else if (category === 'Jewelery') {
     return formatJewelry(description);
-  } else if (category === "Men's Clothing") {
+  } else if (category === 'Men\'s Clothing') {
     return formatMensClothing(description);
   } else if (category === 'Electronics') {
     return Array.of(description);
@@ -73,8 +73,9 @@ function formatAllProducts(products) {
 }
 
 function formatSingleProduct(product) {
-  //Title and Category were formated in the seed.js file
+  // Title and Category were formated in the seed.js file
   product.price = formatPrice(product.price);
+  console.log('HERE', product.price);
   product.description = formatDescription(product.description, product.category);
   return product;
 }
