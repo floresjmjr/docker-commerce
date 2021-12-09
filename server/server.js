@@ -5,7 +5,6 @@ const PORT = 3000;
 const Handlebars = require('handlebars');
 const {create} = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
-require
 
 const hbs = create({handlebars: allowInsecurePrototypeAccess(Handlebars)});
 
