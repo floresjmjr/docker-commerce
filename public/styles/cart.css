@@ -20,10 +20,11 @@
   }
 }
 
+
 @media only screen and (min-width: 800px) {
   #cart {
     display: flex;
-    width: 95%;
+    width: 100%;
   }
   
   #cart #list {
@@ -97,50 +98,6 @@
     border-radius: 0px 10px 0px 0px;
     justify-content: space-between;
     background-color: #ffd300;
-  }
-  
-  #sub-total p{
-    margin: 10px;
-  }
-  
-  #receipt-view {
-    display: flex;
-    flex-direction: column;
-    background-color: lightgray;
-    margin: 15px 0 0 10px;
-    width: 300px;
-    min-width: 300px;
-  }
-  
-  #receipt-view #overview {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin: 25px 25px 10px 25px;
-    border: black solid 1px;
-    padding: 5px;
-  }
-  
-  #checkout{
-    align-content: flex-end;
-    margin: 0 25px 0 25px;
-  }
-  
-  #receipt-view #footer {
-    margin: 25px;
-  }
-  
-  #receipt-view #footer p{
-    font-size: 0.85em;
-  }
-  
-  .checkbox {
-    display: flex;
-    justify-content: baseline;
-  }
-  
-  .checkbox label{
-    font-size: 0.75em;
   }
 
   #sub-total {

@@ -5,7 +5,6 @@ const Order = require('../db/models/Order');
 const {isAdmin, formatSingleProduct, formatAllProducts} = require('./_functions');
 
 router.post('/search', async (req, res) => {
-
   const products = await Product.searchByPhrase(req.body.search);
   const context = {
     products: formatAllProducts(products),
@@ -14,8 +13,8 @@ router.post('/search', async (req, res) => {
   res.render('products', context);
 });
 
-router.get("/Men's", async (req, res) => {
-  const products = await Product.findAll({where: {category: "Men's Clothing"}});
+router.get('/Men\'s', async (req, res) => {
+  const products = await Product.findAll({where: {category: 'Men\'s Clothing'}});
 
   const context = {
     products: formatAllProducts(products),
@@ -24,8 +23,8 @@ router.get("/Men's", async (req, res) => {
   res.render('products', context);
 });
 
-router.get("/Women's", async (req, res) => {
-  const products = await Product.findAll({where: {category: "Women's Clothing"}});
+router.get('/Women\'s', async (req, res) => {
+  const products = await Product.findAll({where: {category: 'Women\'s Clothing'}});
 
   const context = {
     products: formatAllProducts(products),
@@ -57,9 +56,11 @@ router.get('/Electronics', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const product = await Product.findByPk(req.params.id);
+  console.log('PRODUCT', product);
 
   const context = {
     product: formatSingleProduct(product),
+    user: res.app.locals.user,
     admin: isAdmin(res.app.locals.user),
   };
   res.render('single-product', context);

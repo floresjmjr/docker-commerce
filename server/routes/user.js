@@ -69,6 +69,8 @@ router.get('/login', async (req, res) => {
 
 // verify user exist, and return user data if they do
 router.post('/login', async (req, res) => {
+
+  console.log("body recieved: ", req.body);
   try {
     // check user by email
     const [user] = await User.findAll({
@@ -91,13 +93,17 @@ router.post('/login', async (req, res) => {
       throw new Error('Password does not match user');
     }
 
+    console.log("response being sent: ", user);
+
+    res.json(user);
 
     res.app.locals.user = user;
 
+    
 
     // ! This is a place holder for MVP.
     // ! This should return a json of the user to be stored locally
-    res.redirect(`/`);
+    // res.redirect(`/`);
   } catch (err) {
     console.error(err);
   }
