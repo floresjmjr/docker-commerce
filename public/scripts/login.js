@@ -10,12 +10,11 @@ const getUser = async (e) => {
   const email = document.getElementsByName("email")[0].value;
   const password = document.getElementsByName("password")[0].value;
 
-
   const data = {email, password};
 
   console.log('data: ', data);
   try {
-    const user = await fetch('/user/login', {
+    const res = await fetch('/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +22,16 @@ const getUser = async (e) => {
       body: JSON.stringify(data),
     });
 
+    const user = await res.json();
+
     console.log('response from server: ', user);
+
+    const remember = document.getElementsByName("remember")[0].checked;
+    if (remember) {
+      window.localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      window.sessionStorage.setItem("user", JSON.stringify(user));
+    }
 
     const get = await fetch('/', {
       method: 'GET',
@@ -35,8 +43,6 @@ const getUser = async (e) => {
   } catch (err) {
     console.error(err);
   }
-
-
-}
+};
 
 // form.onsubmit = getUser;

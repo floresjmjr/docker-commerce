@@ -93,10 +93,13 @@ router.post('/login', async (req, res) => {
       throw new Error('Password does not match user');
     }
 
+    console.log("response being sent: ", user);
+
+    res.json(user);
 
     res.app.locals.user = user;
 
-    res.json(user);
+    
 
     // ! This is a place holder for MVP.
     // ! This should return a json of the user to be stored locally
