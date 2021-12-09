@@ -136,6 +136,10 @@
     padding: 5px;
   }
   
+  #overview .total {
+    border-top: black solid 1px;
+  }
+
   #checkout{
     align-content: flex-end;
     margin: 0 25px 0 25px;
