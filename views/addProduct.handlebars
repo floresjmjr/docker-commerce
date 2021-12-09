@@ -1,5 +1,15 @@
 <section id='productFormSection'>
   <h2>Add Product</h2>
+{{#if validationError}}
+{{#each validationError}}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Error:</strong> {{this.msg}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/each}}
+{{/if}}
+
+
   <form action='/admin/newProduct' method='POST' id='productForm'>
     <ul id="formElements">
       <li>
