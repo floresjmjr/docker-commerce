@@ -64,6 +64,7 @@ router.post('/create-checkout-session', async (req, res)=>{
   const cartItems = await Order.findOne({
     where: {
       userId: res.app.locals.user.id,
+      isPurchased: 0,
     },
     include: {
       model: Product,
