@@ -15,11 +15,18 @@
               {{/each}}
               </ul>
             </div>
-            <div class="single-product-price">${{product.price}}</div>
-            <form action='/products/{{product.id}}' method='POST' class="single-product-cart-form">
-                <button type='submit' class="single-product-cart-cta">Add to Cart</button>
-            </form>
-            
+            <div class="single-product-price">${{price}}</div>
+{{/with}}
+            {{#if user}}
+                <form action='/products/{{id}}' method='POST' class="single-product-cart-form">
+                    <button type='submit' class="single-product-cart-cta">Add to Cart</button>
+                </form>
+            {{else}}
+                <form action='/user/login' method='GET' class="single-product-cart-form">
+                    <button type='submit' class="single-product-cart-cta">Login to Add to Cart</button>
+                </form>
+            {{/if}}
+
             {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
                 <a href="/">Delete Product</a>
             </div> --}}
