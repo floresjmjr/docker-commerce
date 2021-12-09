@@ -6,10 +6,10 @@ const {isAdmin} = require('./_functions');
 // Server-side validation checks for the product through the req.body
 const productChecks = [
   check('title').notEmpty(),
-  check('price').notEmpty().isCurrency(),
+  check('price').notEmpty().isCurrency().withMessage('Price needs to have 2 digits after decimal'),
   check('description').notEmpty(),
   check('category').notEmpty(),
-  check('image').notEmpty().isURL(),
+  check('image').notEmpty().isURL().withMessage('Image has to be from proper URL'),
 ];
 
 // Admin views the page to create a new product
@@ -32,7 +32,9 @@ router.post('/admin/newProduct', productChecks, async (req, res, next) => {
     if (isAdmin(res.app.locals.user)) {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(404).json({errors: errors.array()});
+        // return res.status(404).json({errors: errors.array()});
+        const validationError = errors.array();
+        return res.render('addProduct', {validationError});
       }
       const product = await Product.create(req.body);
       res.redirect(`/products/${product.id}`);
@@ -50,10 +52,14 @@ router.put('/products/:productId/update', productChecks, async (req, res, next) 
   try {
     if (isAdmin(res.app.locals.user)) {
       const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(404).json({errors: errors.array()});
-      }
       const product = await Product.findByPk(req.params.productId);
+      if (!errors.isEmpty()) {
+        console.log('ERRRR HIT');
+        // return res.status(404).json({errors: errors.array()});
+        const validationError = errors.array();
+        return res.render('updateProduct', {validationError: validationError, product: product});
+      }
+
       await product.update(req.body);
       res.status(200).json({id: req.params.productId});
     } else {
