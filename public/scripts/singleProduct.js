@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Registers/Executes the event handlers and waits for events to occur
     registerHandlers: function() {
       // Admin Delete (Single Product) Functionlity
-      const delBtnNode = document.querySelector('#single-product-delete-button');
+      const delBtnNode = document.querySelector('.single-product-delete-button');
       Handler.deleteProduct(delBtnNode);
     },
 
@@ -37,7 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteProduct: function(node) {
       try {
         node.addEventListener('click', async (e) => {
-          const path = `${window.location.href}/${e.target.value}`;
+          const path = `${window.location.href}`;
+
+          console.log("path to delete: ", path);
 
           const server = await Server.makeRequest('DELETE', path);
 

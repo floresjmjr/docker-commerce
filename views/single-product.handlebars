@@ -16,13 +16,21 @@
               </ul>
             </div>
             <div class="single-product-price">${{product.price}}</div>
-            <form action='/products/{{product.id}}' method='POST' class="single-product-cart-form">
-                <button type='submit' class="single-product-cart-cta">Add to Cart</button>
-            </form>
-            
-            {{!-- <div class="single-product-admin-button" id="single-product-delete-button">
-                <a href="/">Delete Product</a>
-            </div> --}}
+
+            {{#if user}}
+                <form action='/products/{{product.id}}' method='POST' class="single-product-cart-form">
+                    <button type='submit' class="single-product-cart-cta">Add to Cart</button>
+                </form>
+            {{else}}
+                <form action='/user/login' method='GET' class="single-product-cart-form">
+                    <button type='submit' class="single-product-cart-cta">Login to Add to Cart</button>
+                </form>
+            {{/if}}
+            {{#if admin}}
+                <div class="single-product-admin-button" id="single-product-delete-button">
+                    <button class='single-product-delete-button' value='{{product.id}}'>Delete</button>
+                </div>
+            {{/if}}
         </div>
     </section>
 <script src="/scripts/singleProduct.js"></script>

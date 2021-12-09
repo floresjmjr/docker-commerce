@@ -36,7 +36,7 @@ router.post('/admin/newProduct', productChecks, async (req, res, next) => {
         return res.status(404).json({errors: errors.array()});
       }
       const product = await Product.create(req.body);
-      res.render('single-product', product);
+      res.redirect(`/products/${product.id}`);
     } else {
       // Need a unauthorized page
       res.send('You\'re not authorized');

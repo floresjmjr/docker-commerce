@@ -22,7 +22,7 @@ class Product extends Model {
   }
   // order items from low to high price
   static async priceLowToHigh() {
-    const products = await Product.findAll({
+    const products = Product.findAll({
       order: [
         'price', 'ASC',
       ],
@@ -31,7 +31,7 @@ class Product extends Model {
   }
   // order items from high to low price
   static async priceHighToLow() {
-    const products = await Product.findAll({
+    const products = Product.findAll({
       order: [
         'price', 'DESC',
       ],
