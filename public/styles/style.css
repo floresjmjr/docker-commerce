@@ -29,6 +29,7 @@ nav {
 #categoryLinks{
   background-color: #b6f378;
   width: 100%;
+  flex-wrap: wrap;
   height: 50px; 
   display: flex;
   justify-content: space-around;
