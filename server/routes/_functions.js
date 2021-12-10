@@ -5,17 +5,17 @@ function isAdmin(user) {
   return false;
 }
 
-function select( value, options ){
-  const selectElements = ["Men's Clothing", "Women's Clothing", "Jewelery", "Electronics"  ]
-  let htmlString = ''
+function select( value, options ) {
+  const selectElements = ['Men\'s Clothing', 'Women\'s Clothing', 'Jewelery', 'Electronics'];
+  const htmlString = '';
   const selectOptions = selectElements.map((category)=>{
     if (value === category) {
-      return `<option value="${category}" selected>${category}</option>`
+      return `<option value="${category}" selected>${category}</option>`;
     } else {
-      return `<option value="${category}">${category}</option>`
+      return `<option value="${category}">${category}</option>`;
     }
-  }) 
-  return selectOptions.join('\r\n')
+  });
+  return selectOptions.join('\r\n');
 }
 
 function lowercaseWords(sentence) {}

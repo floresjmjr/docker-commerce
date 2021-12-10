@@ -7,6 +7,7 @@ const stripe = require('stripe')('sk_test_51K4HnNDOuKMTHnuIRYjV7kV1IkeqMKQ3S9cPD
 const express = require('express');
 const endpointSecret = 'whsec_zQX8PmpQ6nreCkT8AEWdt2X81jhMQ4K9';
 
+// change order to puchased when stripe webhook hits
 async function update(obj) {
   const cart = await Order.findOne({
     where: {
@@ -18,7 +19,7 @@ async function update(obj) {
   cart.update({isPurchased: 1});
   console.log('CART STATUS UPDATED');
 }
-
+// get cart page
 router.get('/', async (req, res) => {
   if (!res.app.locals.user) {
     res.redirect('/user/login');
@@ -39,28 +40,22 @@ router.get('/', async (req, res) => {
 
   res.render('cart', {cartItems});
 });
-
+// delete product from cart
 router.delete('/:productId', async (req, res)=>{
- 
   const itemToRemove = await Product.findByPk(req.params.productId);
-
   const cart = await Order.findOne({
     where: {
       userId: res.app.locals.user.id,
       isPurchased: 0,
     },
   });
-  
-  const deleted = await cart.removeProduct(itemToRemove);
-  
-
+  await cart.removeProduct(itemToRemove);
   await cart.reload();
   res.sendStatus(200);
 });
-
+// stripe payment route
 router.post('/create-checkout-session', async (req, res)=>{
   console.log('POST HIT');
-  const total = 'need to grab server side total';
   const cartItems = await Order.findOne({
     where: {
       userId: res.app.locals.user.id,
@@ -93,25 +88,9 @@ router.post('/create-checkout-session', async (req, res)=>{
 
   res.redirect(303, session.url);
 });
+// stripe webhook for listening if payment method went through
 router.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
   const event = request.body;
-  // // Only verify the event if you have an endpoint secret defined.
-  // // Otherwise use the basic event deserialized with JSON.parse
-  // if (endpointSecret) {
-  //   // Get the signature sent by Stripe
-  //   const signature = request.headers['stripe-signature'];
-  //   try {
-  //     event = stripe.webhooks.constructEvent(
-  //         request.body,
-  //         signature,
-  //         endpointSecret,
-  //     );
-  //   } catch (err) {
-  //     console.log(`⚠️  Webhook signature verification failed.`, err.message);
-  //     return response.sendStatus(400);
-  //   }
-  // }
-
   // Handle the event
   switch (event.type) {
     case 'payment_intent.succeeded': {
@@ -121,14 +100,7 @@ router.post('/webhook', express.json({type: 'application/json'}), (request, resp
       // handlePaymentIntentSucceeded(paymentIntent);
       update(response.app.locals.user.id);
     }
-
-
       break;
-    // case 'payment_method.attached':
-    //   const paymentMethod = event.data.object;
-    //   // Then define and call a method to handle the successful attachment of a PaymentMethod.
-    //   // handlePaymentMethodAttached(paymentMethod);
-    //   break;
     default:
       // Unexpected event type
       console.log(`Unhandled event type ${event.type}.`);
@@ -137,9 +109,11 @@ router.post('/webhook', express.json({type: 'application/json'}), (request, resp
   // Return a 200 response to acknowledge receipt of the event
   response.send();
 });
+// route for sucessful payment
 router.get('/success', async (req, res)=>{
   res.render('success');
 });
+// route for problem with payment
 router.get('/cancel', async (req, res)=>{
   res.render('cancel');
 });

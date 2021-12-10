@@ -30,11 +30,12 @@
       </div>
       <button type='submit' id='updateUserInfoButton'>Update</button>
     </form>
-   
+   <br/>
   </div>
   {{#if orderHistory}}
   <h1>Order History</h1>
   {{#each orderHistory}}
+  <br/>
 <h3>{{this.createdAt}}</h3>
 {{#each this.Products}}
 <section id="historyProduct">
@@ -47,7 +48,10 @@
 {{/each}}
 {{/each}}
   {{else}}
-  <h3>Looks like you don't have a history with us</h3>
-  <a href='/products'>Start shopping</a>
+  <div style="text-align: center;">
+  <h3>You have not made any purchases...</h3>
+  <h4>Let's change that</h4>
+  <a href='/products'><button>Start Shopping</button></a>
+  </div>
   {{/if}}
 </div>
