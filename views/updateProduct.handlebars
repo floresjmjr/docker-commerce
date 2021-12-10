@@ -9,7 +9,7 @@
 {{/each}}
 {{/if}}
   {{#with product}}
-    <div action='/products/{{id}}/update' method='PUT' id='productForm'>
+    <form action='/products/{{id}}/update' method='POST' id='productForm'>
       <ul>
         <li>
           <label for='title'>Title</label>
@@ -46,7 +46,7 @@
           <button id='updateProductButton'>Update</button>
         </div>
       </div>
-    </div>
+    </form>
   {{/with}}
 </section>
-<script src="/scripts/updateProduct.js"></script>
+{{!-- <script src="/scripts/updateProduct.js"></script> --}}
