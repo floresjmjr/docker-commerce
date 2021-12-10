@@ -75,7 +75,7 @@ function formatDescription(description, category) {
 }
 
 function formatPrice(price) {
-  return price.toFixed(2);
+  return Number(price).toFixed(2);
 }
 
 function formatAllProducts(products) {
@@ -88,7 +88,6 @@ function formatAllProducts(products) {
 function formatSingleProduct(product) {
   // Title and Category were formated in the seed.js file
   product.price = formatPrice(product.price);
-  console.log('HERE', product.price);
   product.description = formatDescription(product.description, product.category);
   return product;
 }

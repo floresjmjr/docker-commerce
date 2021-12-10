@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (request.status === 200) {
             resolve(request);
           } else {
-            reject(false);
+            reject(request);
           }
         });
       });
@@ -33,6 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
       Handler.updateProduct(updateButton);
     },
 
+//     validationScript: function(errors){
+//     const header = document.querySelector('h2')
+//     const errorScript = document.createElement('#errors')
+//     header.insertAdjacentElement('afterbegin', errorScript)
+//     //  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+// //   <strong>Error:</strong> {{this.msg}}
+// //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+// // </div>
+//     },
+
     // Update the product event handler function
     updateProduct: function (node) {
       node.addEventListener('click', async () => {
@@ -44,11 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
           for (el of inputArray) {
             data[el.name] = el.value;
           }
+          const selectTag = document.querySelector('#category')
+          data['category'] = selectTag.options[selectTag.selectedIndex].value
+          console.log('front-end', data)
           data['description'] = document.querySelector('textarea').textContent.trim();
           const serverRequest = await Server.makeRequest('PUT', path, data);
           const parsedData = JSON.parse(serverRequest.response);
           if (parsedData.id) {
             window.location.assign(`http://localhost:3000/products/${parsedData.id}`);
+          } else {
+            this.validationScript(parsedData)
           }
         } catch (error) {
           console.error(`Error message on the front-end: ${error}`);

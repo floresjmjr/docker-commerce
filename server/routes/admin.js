@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {check, validationResult} = require('express-validator');
 const {Product} = require('../db/index');
-const {isAdmin} = require('./_functions');
+const {isAdmin, formatSingleProduct} = require('./_functions');
 
 // Server-side validation checks for the product through the req.body
 const productChecks = [
@@ -19,7 +19,7 @@ router.get('/admin/newProduct', (req, res, next) => {
       res.render('addProduct');
     } else {
       // Need a unauthorized page
-      res.send('You\'re not authorized');
+      res.send("You're not authorized");
     }
   } catch (error) {
     next(error);
@@ -28,7 +28,6 @@ router.get('/admin/newProduct', (req, res, next) => {
 
 // Admin creates a new product for sale
 router.post('/admin/newProduct', productChecks, async (req, res, next) => {
-  console.log('add product', req.body)
   try {
     if (isAdmin(res.app.locals.user)) {
       const errors = validationResult(req);
@@ -41,7 +40,7 @@ router.post('/admin/newProduct', productChecks, async (req, res, next) => {
       res.redirect(`/products/${product.id}`);
     } else {
       // Need a unauthorized page
-      res.send('You\'re not authorized');
+      res.send("You're not authorized");
     }
   } catch (error) {
     next(error);
@@ -49,23 +48,27 @@ router.post('/admin/newProduct', productChecks, async (req, res, next) => {
 });
 
 // Admin updates the product information
-router.put('/products/:productId/update', productChecks, async (req, res, next) => {
+router.post('/products/:productId/update', productChecks, async (req, res, next) => {
   try {
     if (isAdmin(res.app.locals.user)) {
       const errors = validationResult(req);
       const product = await Product.findByPk(req.params.productId);
       if (!errors.isEmpty()) {
-        console.log('ERRRR HIT');
         // return res.status(404).json({errors: errors.array()});
         const validationError = errors.array();
         return res.render('updateProduct', {validationError: validationError, product: product});
       }
-
       await product.update(req.body);
-      res.status(200).json({id: req.params.productId});
+
+      const context = {
+        product: formatSingleProduct(product),
+        admin: isAdmin(res.app.locals.user),
+      };
+
+      res.render('single-product', context);
     } else {
       // Need a unauthorized page
-      res.send('You\'re not authorized');
+      res.send("You're not authorized");
     }
   } catch (error) {
     next(error);
@@ -80,7 +83,7 @@ router.get('/products/:productId/update', async (req, res, next) => {
       res.render('updateProduct', {product: product});
     } else {
       // Need a unauthorized page
-      res.send('You\'re not authorized');
+      res.send("You're not authorized");
     }
   } catch (error) {
     next(error);
@@ -95,7 +98,7 @@ router.delete('/products/:productId', async (req, res, next) => {
       res.sendStatus(200);
     } else {
       // Need a unauthorized page
-      res.send('You\'re not authorized');
+      res.send("You're not authorized");
     }
   } catch (error) {
     next(error);

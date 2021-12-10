@@ -56,8 +56,6 @@ router.get('/Electronics', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const product = await Product.findByPk(req.params.id);
-  console.log('PRODUCT', product);
-
   const context = {
     product: formatSingleProduct(product),
     user: res.app.locals.user,
