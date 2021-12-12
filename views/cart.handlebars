@@ -46,7 +46,7 @@
         </form>
     </div>
     <div id="footer">
-      <p>filler text that tells you about deals and warranty and promotes the store credit card. Also don't forget to have a total of $200 or more for free shipping</p>
+      <p></p>
       <div class="checkbox">
         <input type="checkbox" name="check-one"/>
         <label for="check-one"> Sign-up for our newsletter for weekly deals just for you! </label>
@@ -60,8 +60,11 @@
   <script src="/scripts/cart.js"></script>
 </div>
 {{else}}
-<h3>Looks like you have no items in yout cart</h3>
-<a href='/products'>Start shopping</a>
+<div style="text-align: center;">
+  <h2>That's suspicious... that's weird..</h2>
+  <h3>Looks like you have no items in your cart</h3>
+<a href='/products'><button>Start shopping</button></a>
+</div>
 {{/if}}
-<!-- TODO: Make sure to querry cart with products from user -->
+
 

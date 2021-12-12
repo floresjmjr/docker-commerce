@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   res.redirect(homePage);
 });
 
-
+// grabbing all the routes
 router.use('/user', require('./user'));
 router.use('/products', require('./products'));
 router.use('/cart', require('./cart'));

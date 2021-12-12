@@ -3,7 +3,7 @@ const router = require('express').Router();
 const {check, validationResult} = require('express-validator');
 const {User, Order, Product} = require('../db');
 
-
+// validations for signup
 const signupChecks = [
   check('name')
       .notEmpty().withMessage('Name cannot be empty') // checks name is not empty
@@ -22,27 +22,22 @@ const signupChecks = [
       }),
   check('password').notEmpty().withMessage('Password cannot be empty'), // want to make this stronger but the data seeeded will needd to match validations,
 ];
-// let validatationError;
 
-
+// get signup page
 router.get('/signup', async (req, res)=>{
   res.render('signup');
 });
-
+// create a user
 router.post('/signup', signupChecks, async (req, res)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    // return res.status(400).json({errors: errors.array()});
     const validationError = errors.array();
-
     return res.render('signup', {validationError});
   }
   // create user
   const user = await User.create(req.body);
-
   // give them a cart
   await user.createOrder({});
-
   // get new User with orders
   const [newUser] = await User.findAll({
     where: {id: user.id},
@@ -51,9 +46,6 @@ router.post('/signup', signupChecks, async (req, res)=>{
       include: Product,
     },
   });
-
-  // console.log('created new user: ', newUser);
-  // console.log('new user after adding order: ', newUser.Orders);
 
   // auto login
   res.app.locals.user = newUser;
@@ -69,8 +61,7 @@ router.get('/login', async (req, res) => {
 
 // verify user exist, and return user data if they do
 router.post('/login', async (req, res) => {
-
-  console.log("body recieved: ", req.body);
+  console.log('body recieved: ', req.body);
   try {
     // check user by email
     const [user] = await User.findAll({
@@ -93,13 +84,12 @@ router.post('/login', async (req, res) => {
       throw new Error('Password does not match user');
     }
 
-    console.log("response being sent: ", user);
+    console.log('response being sent: ', user);
 
     res.json(user);
 
     res.app.locals.user = user;
 
-    
 
     // ! This is a place holder for MVP.
     // ! This should return a json of the user to be stored locally
@@ -109,12 +99,12 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
+// get logout page
 router.get('/logout', async (req, res) => {
   res.app.locals.user = undefined;
   res.redirect('/');
 });
-
+// get user account page
 router.get('/account', async (req, res)=>{
   const recentPurchases = await Order.findAll({where: {
     userId: res.app.locals.user.id,
@@ -123,6 +113,7 @@ router.get('/account', async (req, res)=>{
 
   res.render('account', {user: res.app.locals.user, orderHistory: recentPurchases});
 });
+// update user information
 router.post('/account/update', async (req, res)=>{
   const user = await User.findByPk(res.app.locals.user.id);
   res.app.locals.user = await user.update(req.body);
