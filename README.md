@@ -1,5 +1,5 @@
 # E-Commerce-App
-A simplistic e-commerce app where you can browse items by category and have a seemless check out experience
+A sophisticated e-commerce app where you can browse items by category and have a seemless check out experience
 
 ## Installation
 ```npm install```
