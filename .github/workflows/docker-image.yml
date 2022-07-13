@@ -28,7 +28,6 @@ jobs:
         with:
           context: ./ 
           file: ./Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-lab-two:version1.0
           target: prod
